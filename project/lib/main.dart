@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 void main() {
   runApp(const LanternFestivalApp());
@@ -40,7 +40,7 @@ class LanternFestivalPage extends StatelessWidget {
                     height: 250,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage("assets/laterns.png"),
+                        image: AssetImage("festival.png"),
                         fit: BoxFit.cover,
                         alignment: Alignment.center,
                       ),
@@ -116,8 +116,11 @@ class LanternFestivalPage extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () {},
-                          icon: const Icon(Icons.calendar_view_day,
-                              color: const Color(0xFFf78656), size: 30),
+                          icon: HugeIcon(
+                            icon: HugeIcons.strokeRoundedCalendarFavorite02,
+                            color: const Color(0xFFfaa500),
+                            size: 30.0,
+                          ),
                         ),
                       ],
                     ),
