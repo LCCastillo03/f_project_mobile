@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() {
   runApp(const LanternFestivalApp());
@@ -10,6 +12,9 @@ class LanternFestivalApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        textTheme: GoogleFonts.ralewayTextTheme(),
+      ),
       debugShowCheckedModeBanner: false,
       home: LanternFestivalPage(),
     );
@@ -20,89 +25,102 @@ class LanternFestivalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[900],
+      backgroundColor: const Color(0xFF3f286b),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start, // Alineación opcional
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Imagen de fondo
-              Container(
-                width: double.infinity,
-                height: 300, // Tamaño fijo para evitar problemas
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/laterns.png"),
-                    fit: BoxFit.cover,
-                    alignment: Alignment.center,
+              // Imagen de fondo con texto
+              Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 250,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/laterns.png"),
+                        fit: BoxFit.cover,
+                        alignment: Alignment.center,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-
-              const SizedBox(height: 16),
-
-              // Título
-              const Center(
-                child: Column(
-                  children: [
-                    Text(
-                      'Lantern Festival',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        bottom: 20), // Espacio desde abajo
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Lantern Festival',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'By Suku Zhong',
+                          style: TextStyle(
+                            color: Colors.white54,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      'By Suku Zhong',
-                      style: TextStyle(
-                        color: Colors.white54,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-
               const SizedBox(height: 16),
 
               // Información del evento
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.deepPurple,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'Dec 24',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Container(
+                    width: 400,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF6441b2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            SizedBox(width: 20), // Espacio entre fecha y hora
+
+                            Text(
+                              'Dec\n24',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Monday\n08:00 pm - End',
-                            style: TextStyle(
-                              color: Colors.white70,
+                            SizedBox(width: 40), // Espacio entre fecha y hora
+                            Text(
+                              'Monday\n08:00 pm - End',
+                              style: TextStyle(
+                                color: Colors.white70,
+                                fontSize: 16,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.add_circle,
-                            color: Colors.orange, size: 30),
-                      ),
-                    ],
+                          ],
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.calendar_view_day,
+                              color: const Color(0xFFf78656), size: 30),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -123,18 +141,17 @@ class LanternFestivalPage extends StatelessWidget {
               ),
 
               const SizedBox(height: 12),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
+                child: Wrap(
+                  spacing: 20, // Espaciado entre los ítems
+                  runSpacing: 20, // Espaciado entre líneas si hay más ítems
                   children: [
                     _buildAgendaItem('Live concert', 'Vaccinated', '10:00 pm'),
-                    const SizedBox(height: 8),
                     _buildAgendaItem('Dinner', 'Kuk Portion', '10:00 pm'),
                   ],
                 ),
               ),
-
               const SizedBox(height: 16),
 
               // Precio y botón
@@ -180,6 +197,7 @@ class LanternFestivalPage extends StatelessWidget {
 
   static Widget _buildAgendaItem(String title, String subtitle, String time) {
     return Container(
+      width: 150, // Ajusta el ancho de cada ítem
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.deepPurple,
