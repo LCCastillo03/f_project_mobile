@@ -4,12 +4,14 @@ class AgendaItem extends StatelessWidget {
   final String title;
   final String subtitle;
   final String time;
+  final String imagePath;
 
   const AgendaItem({
     super.key,
     required this.title,
     required this.subtitle,
     required this.time,
+    required this.imagePath,
   });
 
   @override
@@ -24,10 +26,11 @@ class AgendaItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          Image.asset(
+            imagePath, // Ruta de la imagen
             height: 40,
             width: 40,
-            color: Colors.grey[300],
+            fit: BoxFit.cover,
           ),
           const SizedBox(height: 8),
           Text(
