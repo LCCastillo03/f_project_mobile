@@ -40,7 +40,8 @@ class LanternFestivalPage extends StatelessWidget {
                     height: 250,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage("festival.png"),
+                        image: AssetImage(
+                            "lib/presentation/assets/images/laterns-beach.png"),
                         fit: BoxFit.cover,
                         alignment: Alignment.center,
                       ),

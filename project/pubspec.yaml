@@ -55,8 +55,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/laterns.png
-    - assets/festival.png
+    - lib/presentation/assets/images/laterns-beach.png
 
 
   # The following line ensures that the Material Icons font is
