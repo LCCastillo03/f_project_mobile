@@ -126,28 +126,63 @@ Widget _buildEventTarget() {
     },
   ];
 
-  return SizedBox(
-  height: 380,
-  child: PageView.builder(
-    controller: PageController(viewportFraction: 0.8), 
-    itemCount: events.length,
+return LayoutBuilder(
+  builder: (context, constraints) {
+    bool isWeb = constraints.maxWidth > 600; 
+
+    if (isWeb ) {
     
-    itemBuilder: (context, index) {
-      return AnimatedContainer(
-        duration: Duration(milliseconds: 300), 
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: EventCard(
-          imagePath: events[index]["imagePath"]!,
-          month: events[index]["month"]!,
-          day: events[index]["day"]!,
-          eventName: events[index]["eventName"]!,
-          organizer: events[index]["organizer"]!,
-          distance: events[index]["distance"]!,
-          location: events[index]["location"]!,
+      return SizedBox(
+        height: 800,
+        child: GridView.builder(
+          scrollDirection: Axis.vertical,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3, 
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+            childAspectRatio: 0.8, 
+          ),
+          itemCount: events.length,
+          itemBuilder: (context, index) {
+            return EventCard(
+              imagePath: events[index]["imagePath"]!,
+              month: events[index]["month"]!,
+              day: events[index]["day"]!,
+              eventName: events[index]["eventName"]!,
+              organizer: events[index]["organizer"]!,
+              distance: events[index]["distance"]!,
+              location: events[index]["location"]!,
+            );
+          },
         ),
       );
-    },
-  ),
+    } else {
+   
+      return SizedBox(
+        height: 380,
+        child: PageView.builder(
+          controller: PageController(viewportFraction: 0.75),
+          itemCount: events.length,
+          itemBuilder: (context, index) {
+            return Center(
+              child: SizedBox(
+                width: constraints.maxWidth * 0.7,
+                child: EventCard(
+                  imagePath: events[index]["imagePath"]!,
+                  month: events[index]["month"]!,
+                  day: events[index]["day"]!,
+                  eventName: events[index]["eventName"]!,
+                  organizer: events[index]["organizer"]!,
+                  distance: events[index]["distance"]!,
+                  location: events[index]["location"]!,
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    }
+  },
 );
 
 
