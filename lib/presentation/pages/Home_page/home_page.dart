@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; 
 import '../../widgets/search_item.dart' ;
-import '../../widgets/event_card.dart'; // Asegúrate de que la ruta sea correcta
+import '../../widgets/event_card.dart'; 
 
 
 class HomePage extends StatelessWidget {

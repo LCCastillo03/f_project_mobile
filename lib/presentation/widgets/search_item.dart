@@ -22,7 +22,7 @@ class SearchItem extends StatelessWidget {
             child: TextField(
               onChanged: onChanged,
               decoration: const InputDecoration(
-                hintText: 'Search events...',
+                hintText: 'Search...',
                 border: InputBorder.none,
               ),
             ),
