@@ -38,7 +38,7 @@ class LanternFestivalPage extends StatelessWidget {
           height: 250,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("images/laterns-beach.png"),
+              image: AssetImage("assets/images/laterns-beach.png"),
               fit: BoxFit.cover,
               alignment: Alignment.center,
             ),
@@ -113,7 +113,7 @@ class LanternFestivalPage extends StatelessWidget {
               IconButton(
                 onPressed: () {},
                 icon: SvgPicture.asset(
-                  "icons/calendar_empty.svg",
+                  "assets/icons/calendar_empty.svg",
                   width: 30.0,
                   height: 30.0,
                   colorFilter: const ColorFilter.mode(
@@ -147,12 +147,12 @@ class LanternFestivalPage extends StatelessWidget {
             runSpacing: 20,
             children: const [
               AgendaItem(
-                  imagePath: "images/business-icon.png",
+                  imagePath: "assets/images/business-icon.png",
                   title: 'Live concert',
                   subtitle: 'Vaccinated',
                   time: '10:00 pm'),
               AgendaItem(
-                  imagePath: "images/education-icon.png",
+                  imagePath: "assets/images/education-icon.png",
                   title: 'Dinner',
                   subtitle: 'Kuk Portion',
                   time: '10:00 pm'),

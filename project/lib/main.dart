@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'presentation/pages/laterns.dart';
+import 'presentation/pages/Home_page/home_page.dart';
 
 void main() {
   runApp(const LanternFestivalApp());
@@ -16,7 +17,7 @@ class LanternFestivalApp extends StatelessWidget {
         textTheme: GoogleFonts.ralewayTextTheme(),
       ),
       debugShowCheckedModeBanner: false,
-      home: LanternFestivalPage(),
+      home: HomePage(),
     );
   }
 }
