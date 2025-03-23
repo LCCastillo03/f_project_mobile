@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/agenda_item.dart';
 
-class LanternFestivalPage extends StatelessWidget {
-  const LanternFestivalPage({super.key});
+class EducationPage extends StatelessWidget {
+  const EducationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class LanternFestivalPage extends StatelessWidget {
           height: 300,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/laterns-beach.png"),
+              image: AssetImage("assets/images/atomic.png"),
               fit: BoxFit.cover,
               alignment: Alignment.center,
             ),
@@ -50,7 +50,7 @@ class LanternFestivalPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: const [
               Text(
-                'Mindfulness Workshop',
+                'Future of Learning',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -59,7 +59,7 @@ class LanternFestivalPage extends StatelessWidget {
               ),
               SizedBox(height: 4),
               Text(
-                'By Marlon Piñeres',
+                'By Miguel Jimeno',
                 style: TextStyle(
                   color: Colors.white54,
                   fontWeight: FontWeight.bold,
@@ -93,7 +93,7 @@ class LanternFestivalPage extends StatelessWidget {
                 children: [
                   SizedBox(width: 20),
                   Text(
-                    'Dec\n24',
+                    'Jun\n16',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -103,7 +103,7 @@ class LanternFestivalPage extends StatelessWidget {
                   ),
                   SizedBox(width: 40),
                   Text(
-                    'Monday\n08:00 pm - End',
+                    'Monday\n9:00 pm - End',
                     style: TextStyle(
                       color: Colors.white70,
                       fontSize: 16,
@@ -149,22 +149,21 @@ class LanternFestivalPage extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: const [
                 AgendaItem(
+                    imagePath: "assets/images/growth-icon.png",
+                    title: 'Mindfulness Workshop',
+                    date: 'December 24, 2025',
+                    time: '8:00 pm'),
+                SizedBox(width: 12),
+                AgendaItem(
                     imagePath: "assets/images/business-icon.png",
                     title: 'FinTech Revolution',
                     date: 'June 12, 2025',
                     time: '10:00 pm'),
-                SizedBox(width: 12),
                 AgendaItem(
                     imagePath: "assets/images/science-icon.png",
                     title: 'Engineering Future',
                     date: 'June 16, 2025',
                     time: '9:00 pm'),
-                SizedBox(width: 12),
-                AgendaItem(
-                    imagePath: "assets/images/education-icon.png",
-                    title: 'Future of Learning',
-                    date: 'June 16, 2025',
-                    time: '7:00 pm'),
               ],
             ),
           ),
@@ -195,7 +194,7 @@ class LanternFestivalPage extends StatelessWidget {
                 ),
               ),
               Text(
-                '80 /person',
+                '20 /person',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
