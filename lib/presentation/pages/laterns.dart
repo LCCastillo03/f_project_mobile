@@ -195,7 +195,7 @@ class LanternFestivalPage extends StatelessWidget {
                 ),
               ),
               Text(
-                '\ 80 /person',
+                '80 /person',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/agenda_item.dart';
 
-class BusinessPage extends StatelessWidget {
-  const BusinessPage({super.key});
+class EducationPage extends StatelessWidget {
+  const EducationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class BusinessPage extends StatelessWidget {
           height: 300,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/buildings.png"),
+              image: AssetImage("assets/images/atomic.png"),
               fit: BoxFit.cover,
               alignment: Alignment.center,
             ),
@@ -50,7 +50,7 @@ class BusinessPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: const [
               Text(
-                'FinTech Revolution',
+                'Future of Learning',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -59,7 +59,7 @@ class BusinessPage extends StatelessWidget {
               ),
               SizedBox(height: 4),
               Text(
-                'By Augusto Salazar',
+                'By Miguel Jimeno',
                 style: TextStyle(
                   color: Colors.white54,
                   fontWeight: FontWeight.bold,
@@ -93,7 +93,7 @@ class BusinessPage extends StatelessWidget {
                 children: [
                   SizedBox(width: 20),
                   Text(
-                    'Jun\n12',
+                    'Jun\n16',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -103,7 +103,7 @@ class BusinessPage extends StatelessWidget {
                   ),
                   SizedBox(width: 40),
                   Text(
-                    'Thursday\n10:00 pm - End',
+                    'Monday\n9:00 pm - End',
                     style: TextStyle(
                       color: Colors.white70,
                       fontSize: 16,
@@ -155,16 +155,15 @@ class BusinessPage extends StatelessWidget {
                     time: '8:00 pm'),
                 SizedBox(width: 12),
                 AgendaItem(
+                    imagePath: "assets/images/business-icon.png",
+                    title: 'FinTech Revolution',
+                    date: 'June 12, 2025',
+                    time: '10:00 pm'),
+                AgendaItem(
                     imagePath: "assets/images/science-icon.png",
                     title: 'Engineering Future',
                     date: 'June 16, 2025',
                     time: '9:00 pm'),
-                SizedBox(width: 12),
-                AgendaItem(
-                    imagePath: "assets/images/education-icon.png",
-                    title: 'Future of Learning',
-                    date: 'June 16, 2025',
-                    time: '7:00 pm'),
               ],
             ),
           ),
