@@ -4,6 +4,9 @@ import 'presentation/pages/laterns.dart';
 import 'presentation/pages/Home_page/home_page.dart';
 import 'presentation/pages/Events_page/Past_events/past_events_page.dart';
 import 'presentation/pages/Events_page/Future_events/future_events_page.dart';
+//import 'presentation/pages/business.dart';
+//import 'presentation/pages/engine.dart';
+import 'presentation/pages/education.dart';
 
 void main() {
   runApp(const LanternFestivalApp());
@@ -23,6 +26,7 @@ class LanternFestivalApp extends StatelessWidget {
       //home: PastEventsPage(),
       // home: LanternsPage(),
       // home: HomePage(),
+      // home: EducationPage(),
     );
   }
 }

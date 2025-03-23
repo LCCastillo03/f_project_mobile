@@ -1,0 +1,2 @@
+C:/desarrollo/pmovil/f_project_mobile/project/android/app/.cxx/Debug/1b727142/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/desarrollo/pmovil/f_project_mobile/project/android/app/.cxx/Debug/1b727142/arm64-v8a/CMakeFiles/rebuild_cache.dir

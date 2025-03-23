@@ -15,13 +15,13 @@ class LanternFestivalPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildHeader(),
-              const SizedBox(height: 16),
+              const SizedBox(height: 38),
               _buildEventInfo(),
-              const SizedBox(height: 16),
+              const SizedBox(height: 38),
               _buildAgendaSection(),
-              const SizedBox(height: 16),
+              const SizedBox(height: 38),
               _buildPriceAndButton(),
-              const SizedBox(height: 24),
+              const SizedBox(height: 38),
             ],
           ),
         ),
@@ -35,7 +35,7 @@ class LanternFestivalPage extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          height: 250,
+          height: 300,
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/laterns-beach.png"),
@@ -50,7 +50,7 @@ class LanternFestivalPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: const [
               Text(
-                'Lantern Festival',
+                'Mindfulness Workshop',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -59,9 +59,10 @@ class LanternFestivalPage extends StatelessWidget {
               ),
               SizedBox(height: 4),
               Text(
-                'By Suku Zhong',
+                'By Marlon Piñeres',
                 style: TextStyle(
                   color: Colors.white54,
+                  fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
               ),
@@ -79,7 +80,7 @@ class LanternFestivalPage extends StatelessWidget {
         child: Container(
           width: 400,
           alignment: Alignment.center,
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(30),
           decoration: BoxDecoration(
             color: const Color(0xFF443072),
             borderRadius: BorderRadius.circular(12),
@@ -141,22 +142,31 @@ class LanternFestivalPage extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 12),
-          Wrap(
-            spacing: 20,
-            runSpacing: 20,
-            children: const [
-              AgendaItem(
-                  imagePath: "assets/images/business-icon.png",
-                  title: 'Live concert',
-                  subtitle: 'Vaccinated',
-                  time: '10:00 pm'),
-              AgendaItem(
-                  imagePath: "assets/images/education-icon.png",
-                  title: 'Dinner',
-                  subtitle: 'Kuk Portion',
-                  time: '10:00 pm'),
-            ],
+          const SizedBox(height: 20),
+          SizedBox(
+            height: 200,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: const [
+                AgendaItem(
+                    imagePath: "assets/images/business-icon.png",
+                    title: 'FinTech Revolution',
+                    date: 'June 12, 2025',
+                    time: '10:00 pm'),
+                SizedBox(width: 12),
+                AgendaItem(
+                    imagePath: "assets/images/science-icon.png",
+                    title: 'Engineering Future',
+                    date: 'June 16, 2025',
+                    time: '9:00 pm'),
+                SizedBox(width: 12),
+                AgendaItem(
+                    imagePath: "assets/images/education-icon.png",
+                    title: 'Future of Learning',
+                    date: 'June 16, 2025',
+                    time: '7:00 pm'),
+              ],
+            ),
           ),
         ],
       ),
@@ -164,31 +174,52 @@ class LanternFestivalPage extends StatelessWidget {
   }
 
   Widget _buildPriceAndButton() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF443072), // Color morado oscuro como en la imagen
+        borderRadius: BorderRadius.circular(12), // Bordes muy redondeados
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            '\$82 /person',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              Text(
+                'Total Price',
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 14,
+                ),
+              ),
+              Text(
+                '80 /person',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFff6f32),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+              backgroundColor: const Color(0xFFff5757),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(30),
               ),
             ),
             onPressed: () {},
             child: const Text(
-              'Get a Ticket',
-              style: TextStyle(color: Colors.white, fontSize: 16),
+              'Subscribe',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],
