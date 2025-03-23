@@ -1,3 +1,5 @@
+/*
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'presentation/pages/laterns.dart';
@@ -22,11 +24,30 @@ class LanternFestivalApp extends StatelessWidget {
         textTheme: GoogleFonts.ralewayTextTheme(),
       ),
       debugShowCheckedModeBanner: false,
-      home: FutureEventsPage(),
+      //home: FutureEventsPage(),
       //home: PastEventsPage(),
-      // home: LanternsPage(),
-      // home: HomePage(),
+      //home: LanternFestivalPage(),
+      home: HomePage(),
       // home: EducationPage(),
+    );
+  }
+}
+
+*/
+
+import 'package:flutter/material.dart';
+import 'package:project/controllers/navigation_controller.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: NavigationController(),
     );
   }
 }

@@ -9,22 +9,40 @@ class LanternFestivalPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF2e1c53),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildHeader(),
-              const SizedBox(height: 38),
-              _buildEventInfo(),
-              const SizedBox(height: 38),
-              _buildAgendaSection(),
-              const SizedBox(height: 38),
-              _buildPriceAndButton(),
-              const SizedBox(height: 38),
-            ],
+      body: Stack(
+        children: [
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildHeader(),
+                  const SizedBox(height: 38),
+                  _buildEventInfo(),
+                  const SizedBox(height: 38),
+                  _buildAgendaSection(),
+                  const SizedBox(height: 38),
+                  _buildPriceAndButton(),
+                  const SizedBox(height: 38),
+                ],
+              ),
+            ),
           ),
-        ),
+          Positioned(
+            top: 10,
+            left: 10,
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child: IconButton(
+                icon:
+                    const Icon(Icons.arrow_back, color: Colors.white, size: 28),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
