@@ -15,3 +15,18 @@ class FeedbackModel {
     required this.votes,
   });
 }
+
+class FeedbackCreate extends FeedbackModel {
+  FeedbackCreate({
+    required super.username,
+    required super.profilePic,
+    required super.content,
+    required super.rating,
+  }) : super(timestamp: DateTime.now().toIso8601String(), votes: 0);
+
+  Map<String, dynamic> toJson() => {
+    'username': username,
+    'comment': content,
+    'rating': rating,
+  };
+}
