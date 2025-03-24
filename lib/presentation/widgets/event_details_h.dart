@@ -10,7 +10,7 @@ class EventDetailsH extends StatelessWidget {
   final bool isfuture;
 
   const EventDetailsH({
-    Key? key,
+    super.key,
     required this.eventName,
     required this.organizer,
 
@@ -18,7 +18,7 @@ class EventDetailsH extends StatelessWidget {
     required this.month,
     required this.day,
     required this.isfuture,
-  }) : super(key: key);
+  });
 
   @override
 Widget build(BuildContext context) {

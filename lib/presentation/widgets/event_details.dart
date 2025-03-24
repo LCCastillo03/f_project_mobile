@@ -7,12 +7,12 @@ class EventDetails extends StatelessWidget {
   final String location;
 
   const EventDetails({
-    Key? key,
+    super.key,
     required this.eventName,
     required this.organizer,
     required this.distance,
     required this.location,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

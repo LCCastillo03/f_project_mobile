@@ -11,7 +11,7 @@ class EventCard extends StatelessWidget {
   final String location;
 
   const EventCard({
-    Key? key,
+    super.key,
     required this.imagePath,
     required this.month,
     required this.day,
@@ -19,7 +19,7 @@ class EventCard extends StatelessWidget {
     required this.organizer,
     required this.distance,
     required this.location,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
