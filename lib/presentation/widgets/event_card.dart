@@ -5,7 +5,7 @@ class EventCard extends StatefulWidget {
   final String month;
   final String day;
   final String eventName;
-  final String organizer;
+  final String author;
   final String distance;
   final String location;
   final VoidCallback onTap;
@@ -17,7 +17,7 @@ class EventCard extends StatefulWidget {
     required this.month,
     required this.day,
     required this.eventName,
-    required this.organizer,
+    required this.author,
     required this.distance,
     required this.location,
     required this.onTap,
@@ -38,7 +38,7 @@ class _EventCardState extends State<EventCard> {
   }
 
   void toggleSubscription() {
-    setState(() {
+    setState(() { // TODO: REFLECT ON LOCAL STORAGE
       isSubscribed = !isSubscribed;
     });
   }
@@ -113,7 +113,7 @@ class _EventCardState extends State<EventCard> {
                       children: [
                         Expanded(
                           child: Text(
-                            widget.eventName,
+                            widget.eventName.length > 30 ? '${widget.eventName.substring(0, 30)}...' : widget.eventName,
                             style: const TextStyle(
                               color: Colors.black87,
                               fontSize: 18,
@@ -136,7 +136,7 @@ class _EventCardState extends State<EventCard> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'By ${widget.organizer}',
+                      'By ${widget.author.length > 30 ? '${widget.author.substring(0, 30)}...' : widget.author}',
                       style: const TextStyle(
                         color: Colors.black54,
                         fontSize: 14,
@@ -148,14 +148,14 @@ class _EventCardState extends State<EventCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          widget.location,
+                          widget.location.length > 30 ? '${widget.location.substring(0, 30)}...' : widget.location,
                           style: const TextStyle(
                             color: Colors.black54,
                             fontSize: 12,
                           ),
                         ),
                         Text(
-                          '${widget.distance} km away',
+                          '${widget.distance} days away',
                           style: const TextStyle(
                             color: Colors.black54,
                             fontSize: 12,

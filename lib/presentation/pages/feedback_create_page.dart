@@ -57,7 +57,7 @@ class _FeedbackCreatePageState extends State<FeedbackCreatePage> {
                           backgroundColor: Color(0xFFFFC765),
                           child: CircleAvatar(
                             backgroundImage:
-                                AssetImage('images/avatars/$imageName'),
+                                AssetImage('assets/images/avatars/$imageName'),
                             radius: 56,
                           ),
                         ),

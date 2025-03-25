@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class EventDetailsH extends StatelessWidget {
   final String eventName;
-  final String organizer;
+  final String author;
 
   final String imagePath;
   final String month;
@@ -12,7 +12,7 @@ class EventDetailsH extends StatelessWidget {
   const EventDetailsH({
     super.key,
     required this.eventName,
-    required this.organizer,
+    required this.author,
 
     required this.imagePath,
     required this.month,
@@ -61,7 +61,7 @@ Widget build(BuildContext context) {
           ),
           Center(
             child: Text(
-              'by $organizer',
+              'by $author',
               style: const TextStyle(
                 color: Colors.black54,
                 fontSize: 14,

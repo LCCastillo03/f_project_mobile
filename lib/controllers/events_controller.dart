@@ -1,31 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:project/presentation/pages/laterns.dart';
-import 'package:project/presentation/pages/engine.dart';
-import 'package:project/presentation/pages/education.dart';
-import 'package:project/presentation/pages/business.dart';
+import 'package:project/domain/models/event_model.dart';
+import 'package:project/presentation/pages/event_detail_page.dart';
 
 class EventsController {
-  static void navigateTo(BuildContext context, String event) {
-    Widget page;
-    switch (event) {
-      case 'laterns':
-        page = const LanternFestivalPage();
-        break;
-      case 'engine':
-        page = const EnginePage();
-        break;
-      case 'education':
-        page = const EducationPage();
-        break;
-      case 'business':
-        page = const BusinessPage();
-        break;
-      default:
-        return;
-    }
+  static void navigateTo(BuildContext context, EventModel event) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => page),
+      MaterialPageRoute(builder: (context) => EventDetailPage(event: event)),
     );
   }
 }

@@ -1,9 +1,9 @@
 // lib/controllers/navigation_controller.dart
 
 import 'package:flutter/material.dart';
-import 'package:project/presentation/pages/Home_page/home_page.dart';
-import 'package:project/presentation/pages/Events_page/Future_events/future_events_page.dart';
-import 'package:project/presentation/pages/Events_page/Past_events/past_events_page.dart';
+import 'package:project/presentation/pages/home_page.dart';
+import 'package:project/presentation/pages/future_events_page.dart';
+import 'package:project/presentation/pages/past_events_page.dart';
 
 class NavigationController extends StatefulWidget {
   @override

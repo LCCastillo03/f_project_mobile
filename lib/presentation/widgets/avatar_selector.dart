@@ -40,7 +40,7 @@ class AvatarSelector extends StatelessWidget {
                 backgroundColor: selectedAvatar == 'avatar-$index.jpg' ? Color(0xFFFFC765) : Colors.white,
                 radius: 30,
                 child: CircleAvatar(
-                  backgroundImage: AssetImage('images/avatars/avatar-$index.jpg'), // Replace as necessary
+                  backgroundImage: AssetImage('assets/images/avatars/avatar-$index.jpg'), // Replace as necessary
                   radius: 28,
                 ),
               ),

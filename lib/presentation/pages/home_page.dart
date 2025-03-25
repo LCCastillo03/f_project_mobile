@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:project/data/repositories/events_repository.dart';
+import 'package:project/domain/models/event_model.dart';
 import 'package:provider/provider.dart';
-import '../../widgets/search_item.dart';
-import '../../widgets/event_card.dart';
+import '../widgets/search_item.dart';
+import '../widgets/event_card.dart';
 import 'package:project/controllers/events_controller.dart';
 import 'package:project/controllers/subscription_controller.dart';
 
@@ -24,7 +27,7 @@ class HomePage extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.only(left: 20),
                   child: Text(
-                    'Live Event',
+                    'Subscribed Events',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
@@ -73,48 +76,7 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildEventTarget(BuildContext context) {
-    List<Map<String, String>> events = [
-      {
-        "imagePath": "assets/images/laterns-beach.png",
-        "month": "Dec",
-        "day": "24",
-        "eventName": "Mindfulness Workshop",
-        "organizer": "Marlon Piñeres",
-        "distance": "18.2",
-        "location": "Angeles City",
-        "route": "laterns",
-      },
-      {
-        "imagePath": "assets/images/stars.png",
-        "month": "Jan",
-        "day": "16",
-        "eventName": "Engineering Future",
-        "organizer": "Elias Niño",
-        "distance": "10.5",
-        "location": "New York",
-        "route": "engine",
-      },
-      {
-        "imagePath": "assets/images/atomic.png",
-        "month": "Jun",
-        "day": "16",
-        "eventName": "Future of Learning",
-        "organizer": "Miguel Jimeno",
-        "distance": "25.8",
-        "location": "Los Angeles",
-        "route": "education",
-      },
-      {
-        "imagePath": "assets/images/buildings.png",
-        "month": "Jun",
-        "day": "12",
-        "eventName": "FinTech Revolution",
-        "organizer": "Augusto Salazar",
-        "distance": "30.2",
-        "location": "San Francisco",
-        "route": "business",
-      },
-    ];
+    List<EventModel> events = eventsRepo; // TODO: HOME SHOULD STORE SUBSCRIBED EVENTS
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -134,15 +96,15 @@ class HomePage extends StatelessWidget {
               itemCount: events.length,
               itemBuilder: (context, index) {
                 return EventCard(
-                  imagePath: events[index]["imagePath"]!,
-                  month: events[index]["month"]!,
-                  day: events[index]["day"]!,
-                  eventName: events[index]["eventName"]!,
-                  organizer: events[index]["organizer"]!,
-                  distance: events[index]["distance"]!,
-                  location: events[index]["location"]!,
+                  imagePath: events[index].eventDecorationImagePath(),
+                  month: DateFormat('MMMM').format(events[index].date),
+                  day: events[index].date.day.toString(),
+                  eventName: events[index].name,
+                  author: events[index].author,
+                  distance: events[index].date.difference(DateTime.now()).inDays.toString(),
+                  location: events[index].location,
                   onTap: () => EventsController.navigateTo(
-                      context, events[index]["route"]!),
+                      context, events[index]),
                 );
               },
             ),
@@ -158,15 +120,15 @@ class HomePage extends StatelessWidget {
                   child: SizedBox(
                     width: constraints.maxWidth * 0.7,
                     child: EventCard(
-                      imagePath: events[index]["imagePath"]!,
-                      month: events[index]["month"]!,
-                      day: events[index]["day"]!,
-                      eventName: events[index]["eventName"]!,
-                      organizer: events[index]["organizer"]!,
-                      distance: events[index]["distance"]!,
-                      location: events[index]["location"]!,
+                      imagePath: events[index].eventDecorationImagePath(),
+                      month: DateFormat('MMMM').format(events[index].date),
+                      day: events[index].date.day.toString(),
+                      eventName: events[index].name,
+                      author: events[index].author,
+                      distance: events[index].date.difference(DateTime.now()).inDays.toString(),
+                      location: events[index].location,
                       onTap: () => EventsController.navigateTo(
-                          context, events[index]["route"]!),
+                          context, events[index]),
                     ),
                   ),
                 );
