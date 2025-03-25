@@ -14,7 +14,7 @@ class StarRatingForm extends StatelessWidget {
         return IconButton(
           icon: Icon(
             Icons.star,
-            color: Color(index < selectedRating ? 0XFF8A3D7A : 0xFF2e1c53),
+            color: index < selectedRating ? Color(0xFFFFC765) : Color.fromARGB(157, 224, 184, 113),
             size: 60,
           ),
           onPressed: () => onRatingSelected(index + 1),
