@@ -21,7 +21,12 @@ class EventDetailsH extends StatelessWidget {
   });
 
   @override
-Widget build(BuildContext context) {
+Widget build(BuildContext context) {  
+  /* 
+  TODO: 1 MAKE CLICKING ON WIDGET NAVIGATE TO EVENT DETAILS PAGE, AND ON ICON NAVIGATE TO FEEDBACK OR SUBSCRIBE 
+  CONSIDER CHANGING TO STATEFUL WIDGET
+  TODO: 2 REFLECT ON LOCAL STORAGE
+  */
   return Positioned(
     width: 100,
    

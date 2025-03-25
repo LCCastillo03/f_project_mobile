@@ -14,7 +14,7 @@ List<EventModel> eventsRepo = [
   {
     'name': 'Fintech Revolution',
     'author': 'Augusto Salazar',
-    'date': '2025-06-12T12:00:00.000Z',
+    'date': '2024-06-12T12:00:00.000Z',
     'description':
         'Exploring the latest innovations in finance and technology, including blockchain, AI, and fintech startups.',
     'category': 'Business',

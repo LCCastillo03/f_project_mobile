@@ -119,7 +119,7 @@ class HomePage extends StatelessWidget {
                 return Center(
                   child: SizedBox(
                     width: constraints.maxWidth * 0.7,
-                    child: EventCard(
+                    child: EventCard( // TODO: FUTURE AND PAST EVENTS SHOULD HAVE DIFFERENT COLORS
                       imagePath: events[index].eventDecorationImagePath(),
                       month: DateFormat('MMMM').format(events[index].date),
                       day: events[index].date.day.toString(),

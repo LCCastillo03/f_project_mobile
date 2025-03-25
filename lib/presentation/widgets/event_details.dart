@@ -16,6 +16,7 @@ class EventDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: NO SÉ LA VERDAD SI ESTO SE USA BÓRRALO
     return Positioned(
       bottom: 20,
       left: 10,

@@ -6,7 +6,7 @@ class EventCard extends StatefulWidget {
   final String day;
   final String eventName;
   final String author;
-  final String distance;
+  final int distance;
   final String location;
   final VoidCallback onTap;
   final bool isInitiallySubscribed;
@@ -171,5 +171,15 @@ class _EventCardState extends State<EventCard> {
         ),
       ),
     );
+  }
+
+  String _getTimeDistance() {
+    if (widget.distance == 0) {
+      return 'Today';
+    } else if (widget.distance < 0) {
+      return '${widget.distance} days ago';
+    } else {
+      return '${widget.distance} days away';
+    }
   }
 }
