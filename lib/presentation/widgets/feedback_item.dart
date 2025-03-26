@@ -65,7 +65,7 @@ class _FeedbackItemState extends State<FeedbackItem> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CircleAvatar(
-                backgroundImage: NetworkImage(widget.feedback.profilePic),
+                backgroundImage: AssetImage(widget.feedback.profilePic),
                 radius: 25,
               ),
               SizedBox(width: 10),

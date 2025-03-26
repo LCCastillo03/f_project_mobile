@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:project/domain/models/avatar_manager.dart';
 import 'package:project/presentation/widgets/avatar_selector.dart';
 import 'package:project/presentation/widgets/comment_input.dart';
 import 'package:project/presentation/widgets/star_rating_form.dart';
 
 class FeedbackCreatePage extends StatefulWidget {
+  
   @override
   _FeedbackCreatePageState createState() => _FeedbackCreatePageState();
 }
 
 class _FeedbackCreatePageState extends State<FeedbackCreatePage> {
   int selectedRating = 0;
-  String imageName = "avatar-0.jpg";
+  AvatarManager avatarManager = AvatarManager();
   TextEditingController commentController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
+  late String imagePath;
 
   // Function to handle rating selection
   void selectRating(int rating) {
@@ -22,10 +25,16 @@ class _FeedbackCreatePageState extends State<FeedbackCreatePage> {
   }
 
   // Function to handle avatar selection
-  void changeAvatar(newImageName) {
+  void changeAvatar(newImagePath) {
     setState(() {
-      imageName = newImageName;
+      imagePath = newImagePath;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    imagePath = avatarManager.getAvatarPaths()[0];
   }
 
   @override
@@ -57,7 +66,7 @@ class _FeedbackCreatePageState extends State<FeedbackCreatePage> {
                           backgroundColor: Color(0xFFFFC765),
                           child: CircleAvatar(
                             backgroundImage:
-                                AssetImage('assets/images/avatars/$imageName'),
+                                AssetImage(imagePath),
                             radius: 56,
                           ),
                         ),
@@ -126,7 +135,7 @@ class _FeedbackCreatePageState extends State<FeedbackCreatePage> {
                       // Avatar Selector sub-section
                       AvatarSelector(
                           onAvatarSelected: changeAvatar,
-                          selectedAvatar: imageName),
+                          selectedAvatar: imagePath),
                       SizedBox(height: 23),
                       // Comment sub-section
                       Text(
