@@ -101,7 +101,7 @@ class HomePage extends StatelessWidget {
                   day: events[index].date.day.toString(),
                   eventName: events[index].name,
                   author: events[index].author,
-                  distance: events[index].date.difference(DateTime.now()).inDays.toString(),
+                  distance: events[index].date.difference(DateTime.now()).inDays,
                   location: events[index].location,
                   onTap: () => EventsController.navigateTo(
                       context, events[index]),
@@ -125,7 +125,7 @@ class HomePage extends StatelessWidget {
                       day: events[index].date.day.toString(),
                       eventName: events[index].name,
                       author: events[index].author,
-                      distance: events[index].date.difference(DateTime.now()).inDays.toString(),
+                      distance: events[index].date.difference(DateTime.now()).inDays,
                       location: events[index].location,
                       onTap: () => EventsController.navigateTo(
                           context, events[index]),

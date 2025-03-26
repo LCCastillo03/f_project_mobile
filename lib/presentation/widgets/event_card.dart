@@ -155,7 +155,7 @@ class _EventCardState extends State<EventCard> {
                           ),
                         ),
                         Text(
-                          '${widget.distance} days away',
+                          _getTimeDistance(),
                           style: const TextStyle(
                             color: Colors.black54,
                             fontSize: 12,
@@ -177,7 +177,7 @@ class _EventCardState extends State<EventCard> {
     if (widget.distance == 0) {
       return 'Today';
     } else if (widget.distance < 0) {
-      return '${widget.distance} days ago';
+      return '${widget.distance*-1} days ago';
     } else {
       return '${widget.distance} days away';
     }
