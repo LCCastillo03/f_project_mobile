@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class EventDetailsH extends StatelessWidget {
   final String eventName;
-  final String organizer;
+  final String author;
 
   final String imagePath;
   final String month;
@@ -10,18 +10,23 @@ class EventDetailsH extends StatelessWidget {
   final bool isfuture;
 
   const EventDetailsH({
-    Key? key,
+    super.key,
     required this.eventName,
-    required this.organizer,
+    required this.author,
 
     required this.imagePath,
     required this.month,
     required this.day,
     required this.isfuture,
-  }) : super(key: key);
+  });
 
   @override
-Widget build(BuildContext context) {
+Widget build(BuildContext context) {  
+  /* 
+  TODO: 1 MAKE CLICKING ON WIDGET NAVIGATE TO EVENT DETAILS PAGE, AND ON ICON NAVIGATE TO FEEDBACK OR SUBSCRIBE 
+  CONSIDER CHANGING TO STATEFUL WIDGET
+  TODO: 2 REFLECT ON LOCAL STORAGE
+  */
   return Positioned(
     width: 100,
    
@@ -61,7 +66,7 @@ Widget build(BuildContext context) {
           ),
           Center(
             child: Text(
-              'by $organizer',
+              'by $author',
               style: const TextStyle(
                 color: Colors.black54,
                 fontSize: 14,

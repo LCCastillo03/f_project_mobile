@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 
 class EventDetails extends StatelessWidget {
   final String eventName;
-  final String organizer;
+  final String author;
   final String distance;
   final String location;
 
   const EventDetails({
-    Key? key,
+    super.key,
     required this.eventName,
-    required this.organizer,
+    required this.author,
     required this.distance,
     required this.location,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
+    // TODO: NO SÉ LA VERDAD SI ESTO SE USA BÓRRALO
     return Positioned(
       bottom: 20,
       left: 10,
@@ -45,7 +46,7 @@ class EventDetails extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      'By $organizer',
+                      'By $author',
                       style: const TextStyle(
                         color: Colors.black54,
                         fontSize: 12,

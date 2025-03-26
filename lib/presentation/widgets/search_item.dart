@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class SearchItem extends StatelessWidget {
   final ValueChanged<String> onChanged;
 
-  const SearchItem({Key? key, required this.onChanged}) : super(key: key);
+  const SearchItem({super.key, required this.onChanged});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  // TODO: .......
     return Container(
       height: 40,
       padding: const EdgeInsets.symmetric(horizontal: 10),
