@@ -10,6 +10,8 @@ class FeedbackRepositoryImpl implements FeedbackRepository {
 */
 import 'package:project/domain/models/event_model.dart';
 
+final now = '2025';
+
 List<EventModel> eventsRepo = [
   {
     'name': 'Fintech Revolution',
@@ -25,7 +27,7 @@ List<EventModel> eventsRepo = [
   {
     'name': 'Global Health Forum',
     'author': 'Dr. Carolina Mendoza',
-    'date': '2025-07-20T10:30:00.000Z',
+    'date': '2024-07-20T10:30:00.000Z',
     'description':
         'A discussion on global health challenges, advancements in medicine, and collaborative healthcare solutions.',
     'category': 'Science',
@@ -36,7 +38,7 @@ List<EventModel> eventsRepo = [
   {
     'name': 'Engineering the Future',
     'author': 'Enrique Ramos',
-    'date': '2025-05-15T18:00:00.000Z',
+    'date': '2024-05-15T18:00:00.000Z',
     'description':
         'An interactive session showcasing groundbreaking innovations in science and engineering for sustainable development.',
     'category': 'Science',

@@ -23,18 +23,7 @@ class HomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildHeader(),
-                const SizedBox(height: 16),
-                const Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Text(
-                    'Subscribed Events',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+             
                 const SizedBox(height: 16),
                 _buildEventTarget(context),
               ],
@@ -46,30 +35,54 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildHeader() {
+    
+    final hour = DateTime.now().hour;
+
+    String greeting;
+    if (hour >= 5 && hour < 12) {
+      greeting = 'Good Morning!';
+    } else if (hour >= 12 && hour < 18) {
+      greeting = 'Good Afternoon!';
+    } else {
+      greeting = 'Good Evening!';
+    }
     return Stack(
       children: [
+      
         Container(
           width: double.infinity,
           color: const Color(0xFFFEF2EE),
           padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+          
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 40),
-              const Text(
-                'Schedule Event',
+               Text(
+                greeting,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 4),
               SearchItem(
                 onChanged: (value) {},
               ),
             ],
           ),
+          
+        ),
+          Positioned(
+         top: 0,
+         right: 0,
+         child: SizedBox(
+           height: 150,
+           child: Image.asset(
+             "assets/images/Deco_home.png",
+             fit: BoxFit.cover,
+           ),
+         ),
         ),
       ],
     );
