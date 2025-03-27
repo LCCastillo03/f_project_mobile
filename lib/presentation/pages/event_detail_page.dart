@@ -45,7 +45,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                   _buildHeader(),
                   Center(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 35, vertical: 38),
+                      padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -87,39 +87,72 @@ class _EventDetailPageState extends State<EventDetailPage> {
       children: [
         Container(
           width: double.infinity,
-          height: 300,
+          height: 250,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(imagePath),
               fit: BoxFit.cover,
-              alignment: Alignment.center,
+              alignment: Alignment.topCenter,
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                widget.event.name,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 4),
-              Text(
-                'By ${widget.event.author}',
-                style: TextStyle(
-                  color: Colors.white54,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-            ],
+        Container(
+          width: double.infinity,
+          height: 250,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.transparent, 
+                Colors.transparent, 
+                Color(0xFF2e1c53).withValues(alpha: 0.6), 
+                Color(0xFF2e1c53), 
+              ],
+            ),
+            //backgroundBlendMode: BlendMode.overlay,
           ),
+        ),
+        Column(
+          spacing: 3,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              widget.event.name,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              'By ${widget.event.author}',
+              style: TextStyle(
+                color: Colors.white54,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              spacing: 5,
+              children: [
+                Icon(
+                  Icons.location_pin,
+                  color: Colors.white54,
+                  size: 16,
+                ),
+                Text(
+                  widget.event.location,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white54,
+                  ),
+                )
+              ],
+            ),
+            SizedBox(height: 23),
+          ],
         ),
       ],
     );
@@ -129,7 +162,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
     return Container(
       width: double.infinity,
       alignment: Alignment.center,
-      padding: const EdgeInsets.all(30),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: const Color(0xFF443072),
         borderRadius: BorderRadius.circular(12),
@@ -144,41 +177,23 @@ class _EventDetailPageState extends State<EventDetailPage> {
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 18,
+              fontSize: 17,
               fontWeight: FontWeight.bold,
               height: 1.2,
             ),
           ),
-          // Weekday, time \ Location
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '${DateFormat('EEEE').format(widget.event.date)}, ${widget.event.date.hour}:${widget.event.date.minute > 9 ? widget.event.date.minute : '0${widget.event.date.minute}'}',
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 16,
-                ),
-              ),
-              Row(
-                spacing: 5,
-                children: [
-                  Icon(
-                    Icons.location_pin,
-                    color: Colors.white70,
-                    size: 16,
-                  ),
-                  Text(
-                    widget.event.location,
-                    style: TextStyle(color: Colors.white70),
-                  )
-                ],
-              )
-            ],
+          // Weekday \ time
+          Text(
+            '${DateFormat('EEEE').format(widget.event.date)}\n${widget.event.date.hour}:${widget.event.date.minute > 9 ? widget.event.date.minute : '0${widget.event.date.minute}'}',
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 16,
+            ),
+            textAlign: TextAlign.center,
           ),
           // Calendar icon
           Padding(
-            padding: const EdgeInsets.only(right: 8, left: 8),
+            padding: const EdgeInsets.only(right: 10, left: 8),
             child: SvgPicture.asset(
               "assets/icons/${subscribed ? 'calendar_joined' : 'calendar_empty'}.svg",
               width: 30.0,
@@ -306,71 +321,73 @@ class _EventDetailPageState extends State<EventDetailPage> {
   }
 
   Widget _buildPastFooter() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 16),
-      color: const Color.fromARGB(230, 46, 28, 83),
+    return IntrinsicHeight(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-        decoration: BoxDecoration(
-          color: const Color(0xFF443072), 
-          borderRadius: BorderRadius.circular(12), 
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Average rating',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
+        padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 16),
+        color: const Color.fromARGB(230, 46, 28, 83),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          decoration: BoxDecoration(
+            color: const Color(0xFF443072), 
+            borderRadius: BorderRadius.circular(12), 
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Average rating',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 14,
+                    ),
+                  ),
+                  Row(
+                    spacing: 5,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '3.5',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 3),
+                        child: Icon(
+                          Icons.star,
+                          color: Color(0xFFf1c67a),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFff5757),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                Row(
-                  spacing: 5,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '3.5',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 3),
-                      child: Icon(
-                        Icons.star,
-                        color: Color(0xFFf1c67a),
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFff5757),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+                onPressed: () => {},  // TODO: Redirect to feedback page
+                child: Text(
+                  'Review',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              onPressed: () => {},  // TODO: Redirect to feedback page
-              child: Text(
-                'Review',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

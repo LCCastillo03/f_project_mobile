@@ -14,7 +14,7 @@ class EventModel {
   final int maxParticipants;
   final int subscribedParticipants;
   final String location;
-  final int? avgRating;
+  final double? avgRating;
 
   EventModel({
     required this.name,
