@@ -75,6 +75,8 @@ List<EventModel> eventsRepo = [
 
     if (aIsCurrentYear && !bIsCurrentYear) return -1;
     if (!aIsCurrentYear && bIsCurrentYear) return 1;
-
+    if (!aIsCurrentYear && !bIsCurrentYear) {
+      return b.date.compareTo(a.date);
+    }
     return a.date.compareTo(b.date);
   });
