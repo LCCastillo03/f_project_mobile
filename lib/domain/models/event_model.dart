@@ -14,6 +14,7 @@ class EventModel {
   final int maxParticipants;
   final int subscribedParticipants;
   final String location;
+  final int? avgRating;
 
   EventModel({
     required this.name,
@@ -24,6 +25,7 @@ class EventModel {
     required this.maxParticipants,
     required this.subscribedParticipants,
     required this.location,
+    this.avgRating,
   });
 
   // Factory constructor to create an instance of EventModel from JSON
@@ -37,6 +39,7 @@ class EventModel {
       maxParticipants: json['maxParticipants'],
       subscribedParticipants: json['subscribedParticipants'],
       location: json['location'],
+      avgRating: json['avgRating'],
     );
   }
 
@@ -51,6 +54,7 @@ class EventModel {
       'maxParticipants': maxParticipants,
       'subscribedParticipants': subscribedParticipants,
       'location': location,
+      'avgRating': avgRating,
     };
   }
 

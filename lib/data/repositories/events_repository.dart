@@ -23,6 +23,7 @@ List<EventModel> eventsRepo = [
     'maxParticipants': 20,
     'subscribedParticipants': 2,
     'location': 'Universidad del Norte',
+    'avgRating': 4.3,
   },
   {
     'name': 'Global Health Forum',
@@ -34,6 +35,7 @@ List<EventModel> eventsRepo = [
     'maxParticipants': 100,
     'subscribedParticipants': 50,
     'location': 'Centro Médico Internacional, Barranquilla',
+    'avgRating': 3.9,
   },
   {
     'name': 'Engineering the Future',
@@ -45,6 +47,7 @@ List<EventModel> eventsRepo = [
     'maxParticipants': 30,
     'subscribedParticipants': 15,
     'location': 'Universidad del Atlántico',
+    'avgRating': 3.5,
   },
   {
     'name': 'Mindful Living Workshop',
@@ -56,6 +59,7 @@ List<EventModel> eventsRepo = [
     'maxParticipants': 50,
     'subscribedParticipants': 35,
     'location': 'Yoga Studio Barranquilla',
+    'avgRating': 0,
   },
   {
     'name': 'Innovative Education Summit',
@@ -67,6 +71,7 @@ List<EventModel> eventsRepo = [
     'maxParticipants': 200,
     'subscribedParticipants': 150,
     'location': 'Plaza de la Paz, Barranquilla',
+    'avgRating': 0,
   }
 ].map((e) => EventModel.fromJson(e)).toList()
   ..sort((a, b) => b.date.compareTo(a.date));

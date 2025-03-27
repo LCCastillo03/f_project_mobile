@@ -94,9 +94,9 @@ class _EventCardState extends State<EventCard> {
             ),
             // 📌 Detalles del evento con el corazón a la derecha del nombre
             Positioned(
-              bottom: 10,
-              left: 10,
-              right: 10,
+              bottom: 15,
+              left: 15,
+              right: 15,
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
@@ -110,6 +110,7 @@ class _EventCardState extends State<EventCard> {
                     // 📌 Fila con el nombre del evento y el corazón
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: Text(
@@ -134,7 +135,6 @@ class _EventCardState extends State<EventCard> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
                     Text(
                       'By ${widget.author.length > 20 ? '${widget.author.substring(0, 20)}...' : widget.author}',
                       style: const TextStyle(
@@ -142,7 +142,7 @@ class _EventCardState extends State<EventCard> {
                         fontSize: 14,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 3),
                     // 📌 Ubicación y distancia
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
