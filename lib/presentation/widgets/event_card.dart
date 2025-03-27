@@ -94,7 +94,7 @@ class _EventCardState extends State<EventCard> {
             ),
             // 📌 Detalles del evento con el corazón a la derecha del nombre
             Positioned(
-              bottom: 20,
+              bottom: 10,
               left: 10,
               right: 10,
               child: Container(
@@ -102,7 +102,7 @@ class _EventCardState extends State<EventCard> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(13),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,7 +113,7 @@ class _EventCardState extends State<EventCard> {
                       children: [
                         Expanded(
                           child: Text(
-                            widget.eventName.length > 30 ? '${widget.eventName.substring(0, 30)}...' : widget.eventName,
+                            widget.eventName.length > 20 ? '${widget.eventName.substring(0, 20)}...' : widget.eventName,
                             style: const TextStyle(
                               color: Colors.black87,
                               fontSize: 18,
@@ -136,7 +136,7 @@ class _EventCardState extends State<EventCard> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'By ${widget.author.length > 30 ? '${widget.author.substring(0, 30)}...' : widget.author}',
+                      'By ${widget.author.length > 20 ? '${widget.author.substring(0, 20)}...' : widget.author}',
                       style: const TextStyle(
                         color: Colors.black54,
                         fontSize: 14,
@@ -148,7 +148,7 @@ class _EventCardState extends State<EventCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          widget.location.length > 30 ? '${widget.location.substring(0, 30)}...' : widget.location,
+                          widget.location.length > 20 ? '${widget.location.substring(0, 20)}...' : widget.location,
                           style: const TextStyle(
                             color: Colors.black54,
                             fontSize: 12,

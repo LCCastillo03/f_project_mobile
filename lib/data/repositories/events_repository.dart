@@ -66,4 +66,5 @@ List<EventModel> eventsRepo = [
     'subscribedParticipants': 150,
     'location': 'Plaza de la Paz, Barranquilla',
   }
-].map((e) => EventModel.fromJson(e)).toList();
+].map((e) => EventModel.fromJson(e)).toList()
+  ..sort((a, b) => b.date.compareTo(a.date));
