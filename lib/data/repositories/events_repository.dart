@@ -73,6 +73,7 @@ List<EventModel> eventsRepo = [
     bool aIsCurrentYear = a.date.year == 2025;
     bool bIsCurrentYear = b.date.year == 2025;
 
+    //Puede haber una manera mejor de hacerlo, pero idk
     if (aIsCurrentYear && !bIsCurrentYear) return -1;
     if (!aIsCurrentYear && bIsCurrentYear) return 1;
     if (!aIsCurrentYear && !bIsCurrentYear) {
