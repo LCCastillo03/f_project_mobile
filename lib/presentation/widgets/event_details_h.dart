@@ -17,24 +17,20 @@ class EventDetailsH extends StatelessWidget {
   });
 
   @override
-Widget build(BuildContext context) {  
-  /* 
+  Widget build(BuildContext context) {
+    /* 
   TODO: 1 MAKE CLICKING ON WIDGET NAVIGATE TO EVENT DETAILS PAGE, AND ON ICON NAVIGATE TO FEEDBACK OR SUBSCRIBE 
   CONSIDER CHANGING TO STATEFUL WIDGET
   TODO: 2 REFLECT ON LOCAL STORAGE
   */
-  return Positioned(
-   
-    child: Container(
+    return Container(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         children: [
-          
           const SizedBox(height: 15),
-
           Center(
             child: Text(
               eventName,
@@ -59,7 +55,6 @@ Widget build(BuildContext context) {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
@@ -85,37 +80,30 @@ Widget build(BuildContext context) {
                   ],
                 ),
               ),
-              const SizedBox(width: 8), 
+              const SizedBox(width: 8),
               if (isfuture) ...[
-                 IconButton(
-                    icon: const Icon(
-                      Icons.access_time,
-                      color: Color.fromARGB(207, 72, 64, 222),
-                      size: 20,
-                    ),
-                    onPressed: () {
-                    
-                    },
+                IconButton(
+                  icon: const Icon(
+                    Icons.access_time,
+                    color: Color.fromARGB(207, 72, 64, 222),
+                    size: 20,
                   ),
-              ]else ...[
+                  onPressed: () {},
+                ),
+              ] else ...[
                 IconButton(
                   icon: const Icon(
                     Icons.comment,
                     color: Color.fromARGB(207, 72, 64, 222),
                     size: 20,
                   ),
-                  onPressed: () {
-                    
-                  },
+                  onPressed: () {},
                 ),
               ],
-             
             ],
           ),
         ],
       ),
-    ),
-  );
-}
-
+    );
+  }
 }

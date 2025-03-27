@@ -3,13 +3,13 @@ import 'package:intl/intl.dart';
 import 'package:project/data/repositories/events_repository.dart';
 import 'package:project/presentation/widgets/event_details_h.dart';
 import '../widgets/search_item.dart';
-import  '../../controllers/past_events_controller.dart';
+import '../../controllers/past_events_controller.dart';
 
 class PastEventsPage extends StatefulWidget {
   const PastEventsPage({super.key});
 
   @override
-  _PastEventsPageState createState()=> _PastEventsPageState();
+  _PastEventsPageState createState() => _PastEventsPageState();
 }
 
 class _PastEventsPageState extends State<PastEventsPage> {
@@ -20,6 +20,7 @@ class _PastEventsPageState extends State<PastEventsPage> {
     super.initState();
     controller = PastEventsController();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +45,7 @@ class _PastEventsPageState extends State<PastEventsPage> {
           width: double.infinity,
           height: 700,
           child: Image.asset(
-            "assets/images/olas.png",
+            "assets/images/olas-pasado.png",
             fit: BoxFit.cover,
           ),
         ),
@@ -70,7 +71,8 @@ class _PastEventsPageState extends State<PastEventsPage> {
                       builder: (context, selected, _) {
                         return ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
                             textStyle: const TextStyle(fontSize: 12),
                           ),
                           onPressed: () {
@@ -87,11 +89,13 @@ class _PastEventsPageState extends State<PastEventsPage> {
                           final isSelected = selected == category;
                           return ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
                               textStyle: const TextStyle(fontSize: 12),
                             ),
                             onPressed: () {
-                              controller.selectedCategory.value = isSelected ? null : category;
+                              controller.selectedCategory.value =
+                                  isSelected ? null : category;
                             },
                             child: Text(
                               category,

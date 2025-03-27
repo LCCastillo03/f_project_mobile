@@ -10,6 +10,8 @@ class FeedbackRepositoryImpl implements FeedbackRepository {
 */
 import 'package:project/domain/models/event_model.dart';
 
+final now = '2025';
+
 List<EventModel> eventsRepo = [
   {
     'name': 'Fintech Revolution',
@@ -21,8 +23,6 @@ List<EventModel> eventsRepo = [
     'maxParticipants': 20,
     'subscribedParticipants': 2,
     'location': 'Universidad del Norte',
-    
-    
   },
   {
     'name': 'Global Health Forum',
@@ -68,4 +68,13 @@ List<EventModel> eventsRepo = [
     'subscribedParticipants': 150,
     'location': 'Plaza de la Paz, Barranquilla',
   }
-].map((e) => EventModel.fromJson(e)).toList();
+].map((e) => EventModel.fromJson(e)).toList()
+  ..sort((a, b) {
+    bool aIsCurrentYear = a.date.year == 2025;
+    bool bIsCurrentYear = b.date.year == 2025;
+
+    if (aIsCurrentYear && !bIsCurrentYear) return -1;
+    if (!aIsCurrentYear && bIsCurrentYear) return 1;
+
+    return a.date.compareTo(b.date);
+  });
