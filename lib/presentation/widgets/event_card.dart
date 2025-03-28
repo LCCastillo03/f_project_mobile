@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/utils.dart';
 
 class EventCard extends StatefulWidget {
   final String imagePath;
@@ -6,7 +7,7 @@ class EventCard extends StatefulWidget {
   final String day;
   final String eventName;
   final String author;
-  final int distance;
+  final DateTime date;
   final String location;
   final VoidCallback onTap;
   final bool isInitiallySubscribed;
@@ -18,7 +19,7 @@ class EventCard extends StatefulWidget {
     required this.day,
     required this.eventName,
     required this.author,
-    required this.distance,
+    required this.date,
     required this.location,
     required this.onTap,
     this.isInitiallySubscribed = false,
@@ -114,7 +115,7 @@ class _EventCardState extends State<EventCard> {
                       children: [
                         Expanded(
                           child: Text(
-                            widget.eventName.length > 20 ? '${widget.eventName.substring(0, 20)}...' : widget.eventName,
+                            clipText(widget.eventName, 20),
                             style: const TextStyle(
                               color: Colors.black87,
                               fontSize: 18,
@@ -136,7 +137,7 @@ class _EventCardState extends State<EventCard> {
                       ],
                     ),
                     Text(
-                      'By ${widget.author.length > 20 ? '${widget.author.substring(0, 20)}...' : widget.author}',
+                      clipText('By ${widget.author}', 20),
                       style: const TextStyle(
                         color: Colors.black54,
                         fontSize: 14,
@@ -148,14 +149,14 @@ class _EventCardState extends State<EventCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          widget.location.length > 20 ? '${widget.location.substring(0, 20)}...' : widget.location,
+                          clipText(widget.location, 20), 
                           style: const TextStyle(
                             color: Colors.black54,
                             fontSize: 12,
                           ),
                         ),
                         Text(
-                          _getTimeDistance(),
+                          getTimestamp(widget.date),
                           style: const TextStyle(
                             color: Colors.black54,
                             fontSize: 12,
@@ -171,15 +172,5 @@ class _EventCardState extends State<EventCard> {
         ),
       ),
     );
-  }
-
-  String _getTimeDistance() {
-    if (widget.distance == 0) {
-      return 'Today';
-    } else if (widget.distance < 0) {
-      return '${widget.distance*-1} days ago';
-    } else {
-      return '${widget.distance} days away';
-    }
   }
 }

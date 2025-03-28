@@ -31,21 +31,21 @@ class _NavigationControllerState extends State<NavigationController> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.favorite),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.event_available),
+            icon: Icon(Icons.library_add_rounded),
             label: 'Future Events',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.event),
+            icon: Icon(Icons.history),
             label: 'Past Events',
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor:
-            Colors.purple, // Color morado para el ícono seleccionado
+            Colors.purple,
         unselectedItemColor: Colors.purple.shade200,
         onTap: _onItemTapped,
       ),

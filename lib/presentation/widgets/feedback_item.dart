@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/domain/models/feedback_model.dart';
+import 'package:project/utils.dart';
 
 class FeedbackItem extends StatefulWidget {
   final FeedbackModel feedback;
@@ -77,14 +78,14 @@ class _FeedbackItemState extends State<FeedbackItem> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          widget.feedback.username,
+                          clipText(widget.feedback.username, 30),
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          widget.feedback.timestamp,
+                          widget.feedback.getTimestamp(),
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey,

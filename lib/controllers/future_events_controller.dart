@@ -24,7 +24,6 @@ class FutureEventsController {
   }
 
   List getFilteredEvents() {
-    
     if (selectedCategory.value == null) {
       return eventList;
     }

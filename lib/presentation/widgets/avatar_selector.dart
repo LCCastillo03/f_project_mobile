@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/domain/models/avatar_manager.dart';
+import 'package:project/utils.dart';
 
 class AvatarSelector extends StatelessWidget {
   final Function onAvatarSelected;
@@ -12,27 +12,26 @@ class AvatarSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AvatarManager avatarManager = AvatarManager();
     return Container(
-      padding: EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 25),
+      padding: EdgeInsets.only(left: 15, right: 15, top: 12, bottom: 20),
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: Color(0xff3E2975), // Color(0xFF2E1C53), // Background color
+        color: Color(0xFF2E1C53), // Background color
       ),
       child: Column(
+        spacing: 15,
         children: [
           Text(
             'Select avatar',
             style: TextStyle(
                 fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
           ),
-          SizedBox(height: 15),
           Wrap(
-            alignment: WrapAlignment.spaceEvenly,
-            spacing: 20,
-            runSpacing: 20,
-            children: avatarManager.getAvatarPaths().map((avatarPath) {
+            alignment: WrapAlignment.center,
+            spacing: 15,
+            runSpacing: 15,
+            children: getAvatarPaths().map((avatarPath) {
               return InkWell(
                 borderRadius: BorderRadius.circular(80),
                 hoverColor: Color.fromRGBO(108, 7, 121, 0.236),
@@ -41,10 +40,10 @@ class AvatarSelector extends StatelessWidget {
                   backgroundColor: selectedAvatar == avatarPath
                       ? Color(0xFFFFC765)
                       : Colors.white,
-                  radius: 30,
+                  radius: 28,
                   child: CircleAvatar(
-                    backgroundImage: AssetImage(avatarPath), // Replace as necessary
-                    radius: 28,
+                    backgroundImage: AssetImage(avatarPath),
+                    radius: 25,
                   ),
                 ),
               );

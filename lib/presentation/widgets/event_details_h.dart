@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/utils.dart';
 
 class EventDetailsH extends StatelessWidget {
   final String eventName;
@@ -33,7 +34,7 @@ class EventDetailsH extends StatelessWidget {
           const SizedBox(height: 15),
           Center(
             child: Text(
-              eventName,
+              clipText(eventName, 30),
               style: const TextStyle(
                 color: Colors.black87,
                 fontSize: 12,
@@ -43,7 +44,7 @@ class EventDetailsH extends StatelessWidget {
           ),
           Center(
             child: Text(
-              'by $author',
+              clipText('by $author', 20),
               style: const TextStyle(
                 color: Colors.black54,
                 fontSize: 10,

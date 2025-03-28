@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:project/controllers/feedback_controllers.dart';
 import 'package:project/domain/models/event_model.dart';
+import 'package:project/utils.dart';
 import '../widgets/agenda_item.dart';
 
 class EventDetailPage extends StatefulWidget {
@@ -33,47 +35,40 @@ class _EventDetailPageState extends State<EventDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: widget.event.isPast() ? _buildPastFooter() : _buildFutureFooter(),
+      extendBodyBehindAppBar: true, // Allows app bar to lay over body
+      floatingActionButton: widget.event.isPast() ? _buildPastFooter() : _buildFutureFooter(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+        iconTheme: IconThemeData(
+          size: 30,
+          color: Colors.white,
+        ),
+        toolbarHeight: 58,
+      ),
       backgroundColor: const Color(0xFF2e1c53),
       body: Stack(
         children: [
-          SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildHeader(),
-                  Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildEventSchedule(),
-                          const SizedBox(height: 30),
-                          _buildEventDescription(),
-                        ],
-                      ),
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(),
+                Center(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildEventSchedule(),
+                        const SizedBox(height: 30),
+                        _buildEventDescription(),
+                      ],
                     ),
                   ),
-                  //_buildAgendaSection(),
-                  const SizedBox(height: 72),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            top: 10,
-            left: 10,
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-              ),
-              child: IconButton(
-                icon:
-                    const Icon(Icons.arrow_back, color: Colors.white, size: 28),
-                onPressed: () => Navigator.pop(context),
-              ),
+                ),
+                const SizedBox(height: 90),
+              ],
             ),
           ),
         ],
@@ -118,7 +113,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              widget.event.name,
+              clipText(widget.event.name, 27),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -126,7 +121,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
               ),
             ),
             Text(
-              'By ${widget.event.author}',
+              clipText('By ${widget.event.author}', 35),
               style: TextStyle(
                 color: Colors.white54,
                 fontWeight: FontWeight.bold,
@@ -143,7 +138,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                   size: 16,
                 ),
                 Text(
-                  widget.event.location,
+                  clipText(widget.event.location, 40),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white54,
@@ -265,7 +260,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
     return IntrinsicHeight(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 16),
-        color: const Color.fromARGB(230, 46, 28, 83),
+        color: const Color.fromRGBO(46, 28, 83, 0.6),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           decoration: BoxDecoration(
@@ -324,7 +319,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
     return IntrinsicHeight(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 16),
-        color: const Color.fromARGB(230, 46, 28, 83),
+        color: const Color.fromRGBO(46, 28, 83, 0.4),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           decoration: BoxDecoration(
@@ -350,7 +345,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        '3.5',
+                        widget.event.avgRating.toString(),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -376,9 +371,9 @@ class _EventDetailPageState extends State<EventDetailPage> {
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                onPressed: () => {},  // TODO: Redirect to feedback page
+                onPressed: () => FeedbackController.navigateTo(context, widget.event),  // TODO: Redirect to feedback page
                 child: Text(
-                  'Review',
+                  'Reviews',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,

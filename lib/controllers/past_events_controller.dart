@@ -24,7 +24,6 @@ class PastEventsController {
   }
 
   List getFilteredEvents() {
-    
     if (selectedCategory.value == null) {
       return eventList;
     }

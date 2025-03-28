@@ -10,20 +10,25 @@ class SearchItem extends StatelessWidget {
     return Container(
       height: 40,
       padding: const EdgeInsets.symmetric(horizontal: 10),
+      alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: Color(0xFFFEF2EE),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 10,
         children: [
           const Icon(Icons.search, color: Color(0xFFFBB385)),
-          const SizedBox(width: 10),
           Expanded(
-            child: TextField(
-              onChanged: onChanged,
-              decoration: const InputDecoration(
-                hintText: 'Search...',
-                border: InputBorder.none,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 11),
+              child: TextField(
+                onChanged: onChanged,
+                decoration: const InputDecoration(
+                  hintText: 'Search...',
+                  border: InputBorder.none,
+                ),
               ),
             ),
           ),

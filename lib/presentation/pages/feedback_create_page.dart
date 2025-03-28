@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:project/domain/models/avatar_manager.dart';
 import 'package:project/presentation/widgets/avatar_selector.dart';
 import 'package:project/presentation/widgets/comment_input.dart';
 import 'package:project/presentation/widgets/star_rating_form.dart';
+import 'package:project/utils.dart';
 
 class FeedbackCreatePage extends StatefulWidget {
+  final String eventId;
+
+  const FeedbackCreatePage({super.key, required this.eventId});
   
   @override
   _FeedbackCreatePageState createState() => _FeedbackCreatePageState();
@@ -12,34 +15,34 @@ class FeedbackCreatePage extends StatefulWidget {
 
 class _FeedbackCreatePageState extends State<FeedbackCreatePage> {
   int selectedRating = 0;
-  AvatarManager avatarManager = AvatarManager();
   TextEditingController commentController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
   late String imagePath;
 
   // Function to handle rating selection
-  void selectRating(int rating) {
-    setState(() {
-      selectedRating = rating;
-    });
-  }
+  void selectRating(int rating) => setState(() => selectedRating =  rating);
 
   // Function to handle avatar selection
-  void changeAvatar(newImagePath) {
-    setState(() {
-      imagePath = newImagePath;
-    });
-  }
+  void changeAvatar(newImagePath) => setState(() => imagePath = newImagePath);
 
   @override
   void initState() {
     super.initState();
-    imagePath = avatarManager.getAvatarPaths()[0];
+    imagePath = getAvatarPaths()[0];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true, // Allows app bar to lay over body
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+        iconTheme: IconThemeData(
+          size: 30,
+          color: Colors.white,
+        ),
+        toolbarHeight: 58,
+      ),
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
@@ -48,9 +51,10 @@ class _FeedbackCreatePageState extends State<FeedbackCreatePage> {
                 // Header
                 Container(
                   decoration: BoxDecoration(
+                    // Background image
                     image: DecorationImage(
                       image: AssetImage(
-                          'assets/images/stars.png'), // Background image
+                          'assets/images/stars.png'), 
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -114,8 +118,9 @@ class _FeedbackCreatePageState extends State<FeedbackCreatePage> {
                     ),
                   ),
                 ),
+                // Content under header
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 30, horizontal: 40),
+                  padding: EdgeInsets.symmetric(vertical: 28, horizontal: 35),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -136,10 +141,10 @@ class _FeedbackCreatePageState extends State<FeedbackCreatePage> {
                       AvatarSelector(
                           onAvatarSelected: changeAvatar,
                           selectedAvatar: imagePath),
-                      SizedBox(height: 23),
+                      SizedBox(height: 18),
                       // Comment sub-section
                       Text(
-                        'Comment',
+                        'Leave a comment',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -147,17 +152,17 @@ class _FeedbackCreatePageState extends State<FeedbackCreatePage> {
                       ),
                       SizedBox(height: 10),
                       CommentInput(controller: commentController),
-                      SizedBox(height: 29),
+                      SizedBox(height: 25),
                       // Submit button
                       Center(
                         child: ElevatedButton(
-                          // TODO: HANDLE FORM SUBMISSION
+                          // TODO: HANDLE FORM SUBMISSION (linked to widget.eventId)
                           onPressed: () => {},
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
                             backgroundColor: Color(0XFFF18262),
                             padding: EdgeInsets.only(
-                                top: 20, bottom: 20, left: 30, right: 20),
+                                top: 18, bottom: 18, left: 28, right: 18),
                           ),
                           child: Row(
                             spacing: 15,

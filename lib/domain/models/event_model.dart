@@ -1,4 +1,5 @@
 class EventModel {
+  final String id;
   final String name;
   final String author;
   final DateTime date;
@@ -17,6 +18,7 @@ class EventModel {
   final double? avgRating;
 
   EventModel({
+    required this.id,
     required this.name,
     required this.author,
     required this.date,
@@ -28,9 +30,9 @@ class EventModel {
     this.avgRating,
   });
 
-  // Factory constructor to create an instance of EventModel from JSON
   factory EventModel.fromJson(Map<String, dynamic> json) {
     return EventModel(
+      id: json['id'],
       name: json['name'],
       author: json['author'],
       date: DateTime.parse(json['date']),
@@ -43,9 +45,9 @@ class EventModel {
     );
   }
 
-  // Method to convert EventModel instance back to JSON
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'name': name,
       'author': author,
       'date': date.toIso8601String(),

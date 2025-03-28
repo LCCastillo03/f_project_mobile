@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project/data/repositories/events_repository.dart';
 import 'package:project/domain/models/event_model.dart';
+import 'package:project/utils.dart';
 import 'package:provider/provider.dart';
 import '../widgets/search_item.dart';
 import '../widgets/event_card.dart';
@@ -16,14 +17,13 @@ class HomePage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => SubscriptionController(),
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 250, 250, 250),
+        backgroundColor: Colors.white,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildHeader(),
-             
                 const SizedBox(height: 16),
                 _buildEventTarget(context),
               ],
@@ -35,30 +35,21 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildHeader() {
+    String greeting = getGreeting();
     
-    final hour = DateTime.now().hour;
-
-    String greeting;
-    if (hour >= 5 && hour < 12) {
-      greeting = 'Good Morning!';
-    } else if (hour >= 12 && hour < 18) {
-      greeting = 'Good Afternoon!';
-    } else {
-      greeting = 'Good Evening!';
-    }
     return Stack(
       children: [
-      
         Container(
           width: double.infinity,
           color: const Color(0xFFFEF2EE),
-          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-          
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 5,
             children: [
               const SizedBox(height: 40),
-               Text(
+              // Greeting
+              Text(
                 greeting,
                 style: TextStyle(
                   color: Colors.black,
@@ -66,89 +57,60 @@ class HomePage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              // Search bar
               SearchItem(
-                onChanged: (value) {},
+                onChanged: (value) {}, // TODO: implement search
               ),
             ],
           ),
-          
         ),
-          Positioned(
-         top: 0,
-         right: 0,
-         child: SizedBox(
-           height: 150,
-           child: Image.asset(
-             "assets/images/Deco_home.png",
-             fit: BoxFit.cover,
-           ),
-         ),
+        // Home decoration
+        Positioned(
+          top: 0,
+          right: 0,
+          child: SizedBox(
+            height: 150,
+            child: Image.asset(
+              "assets/images/Deco_home.png",
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
       ],
     );
   }
 
   Widget _buildEventTarget(BuildContext context) {
-    List<EventModel> events = eventsRepo; // TODO: HOME SHOULD STORE SUBSCRIBED EVENTS
+    List<EventModel> events =
+        eventsRepo; // TODO: HOME SHOULD STORE SUBSCRIBED EVENTS
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        bool isWeb = constraints.maxWidth > 600;
-
-        if (isWeb) {
-          return SizedBox(
-            height: 800,
-            child: GridView.builder(
-              scrollDirection: Axis.vertical,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 5,
-                mainAxisSpacing: 5,
-                childAspectRatio: 0.8,
-              ),
-              itemCount: events.length,
-              itemBuilder: (context, index) {
-                return EventCard(
-                  imagePath: events[index].eventDecorationImagePath(),
-                  month: DateFormat('MMMM').format(events[index].date),
-                  day: events[index].date.day.toString(),
-                  eventName: events[index].name,
-                  author: events[index].author,
-                  distance: events[index].date.difference(DateTime.now()).inDays,
-                  location: events[index].location,
-                  onTap: () => EventsController.navigateTo(
-                      context, events[index]),
-                );
-              },
-            ),
-          );
-        } else {
-          return SizedBox(
-            height: 380,
-            child: PageView.builder(
-              controller: PageController(viewportFraction: 0.75),
-              itemCount: events.length,
-              itemBuilder: (context, index) {
-                return Center(
-                  child: SizedBox(
-                    width: constraints.maxWidth * 0.7,
-                    child: EventCard( // TODO: FUTURE AND PAST EVENTS SHOULD HAVE DIFFERENT COLORS
-                      imagePath: events[index].eventDecorationImagePath(),
-                      month: DateFormat('MMMM').format(events[index].date),
-                      day: events[index].date.day.toString(),
-                      eventName: events[index].name,
-                      author: events[index].author,
-                      distance: events[index].date.difference(DateTime.now()).inDays,
-                      location: events[index].location,
-                      onTap: () => EventsController.navigateTo(
-                          context, events[index]),
-                    ),
+        return SizedBox(
+          height: 380,
+          child: PageView.builder(
+            controller: PageController(viewportFraction: 0.75),
+            itemCount: events.length,
+            itemBuilder: (context, index) {
+              return Center(
+                child: SizedBox(
+                  width: constraints.maxWidth * 0.7,
+                  child: EventCard(
+                    imagePath: events[index].eventDecorationImagePath(),
+                    month: DateFormat('MMMM').format(events[index].date),
+                    day: events[index].date.day.toString(),
+                    eventName: events[index].name,
+                    author: events[index].author,
+                    date: events[index].date,
+                    location: events[index].location,
+                    onTap: () =>
+                        EventsController.navigateTo(context, events[index]),
                   ),
-                );
-              },
-            ),
-          );
-        }
+                ),
+              );
+            },
+          ),
+        );
       },
     );
   }

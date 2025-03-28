@@ -14,11 +14,12 @@ final now = '2025';
 
 List<EventModel> eventsRepo = [
   {
+    'id': '1',
     'name': 'Fintech Revolution',
     'author': 'Augusto Salazar',
     'date': '2024-06-12T12:00:00.000Z',
     'description':
-        'Exploring the latest innovations in finance and technology, including blockchain, AI, and fintech startups.',
+        'Dive deep into the transformative world of finance and technology. This event will explore cutting-edge innovations like blockchain, artificial intelligence, and the rise of fintech startups. Attendees will also gain insights into the changing landscape of digital payments, financial inclusion, and disruptive investment technologies reshaping global markets.',
     'category': 'Business',
     'maxParticipants': 20,
     'subscribedParticipants': 2,
@@ -26,11 +27,12 @@ List<EventModel> eventsRepo = [
     'avgRating': 4.3,
   },
   {
+    'id': '2',
     'name': 'Global Health Forum',
     'author': 'Dr. Carolina Mendoza',
     'date': '2024-07-20T10:30:00.000Z',
     'description':
-        'A discussion on global health challenges, advancements in medicine, and collaborative healthcare solutions.',
+        'This forum invites medical professionals, researchers, and policymakers to address today’s most pressing global health challenges. Topics will include breakthroughs in medicine, combating infectious diseases, enhancing healthcare accessibility, and fostering international collaboration to build resilient healthcare systems worldwide.',
     'category': 'Science',
     'maxParticipants': 100,
     'subscribedParticipants': 50,
@@ -38,11 +40,12 @@ List<EventModel> eventsRepo = [
     'avgRating': 3.9,
   },
   {
+    'id': '3',
     'name': 'Engineering the Future',
     'author': 'Enrique Ramos',
     'date': '2024-05-15T18:00:00.000Z',
     'description':
-        'An interactive session showcasing groundbreaking innovations in science and engineering for sustainable development.',
+        'Join an inspiring session dedicated to innovation in science and engineering. This event will cover revolutionary technologies aimed at promoting sustainable development, with special highlights on renewable energy, cutting-edge robotics, and the role of engineering in tackling climate change. Engage with hands-on demonstrations and expert panels discussing the future of our planet.',
     'category': 'Science',
     'maxParticipants': 30,
     'subscribedParticipants': 15,
@@ -50,11 +53,12 @@ List<EventModel> eventsRepo = [
     'avgRating': 3.5,
   },
   {
+    'id': '4',
     'name': 'Mindful Living Workshop',
     'author': 'Sofia Castro',
     'date': '2025-04-30T09:00:00.000Z',
     'description':
-        'Learn practical mindfulness techniques for personal growth, stress reduction, and a balanced life.',
+        'This transformative workshop will introduce attendees to the art of mindfulness, providing practical techniques for stress reduction, emotional balance, and personal growth.',
     'category': 'Personal Growth',
     'maxParticipants': 50,
     'subscribedParticipants': 35,
@@ -62,11 +66,12 @@ List<EventModel> eventsRepo = [
     'avgRating': 0,
   },
   {
+    'id': '5',
     'name': 'Innovative Education Summit',
     'author': 'Laura Rodríguez',
     'date': '2025-08-05T14:00:00.000Z',
     'description':
-        'Join educators and thought leaders to discuss the future of learning, including technology in education.',
+        'This summit brings together educators, technologists, and policy experts to reimagine the future of learning. Discuss innovative teaching methods, the integration of technology in education, and strategies to foster creativity and critical thinking in students. Participants will explore how to bridge gaps in education accessibility and create systems that empower learners of all ages.',
     'category': 'Education',
     'maxParticipants': 200,
     'subscribedParticipants': 150,
