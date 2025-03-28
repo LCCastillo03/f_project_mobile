@@ -67,7 +67,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 90),
+                const SizedBox(height: 95),
               ],
             ),
           ),
@@ -105,7 +105,6 @@ class _EventDetailPageState extends State<EventDetailPage> {
                 Color(0xFF2e1c53), 
               ],
             ),
-            //backgroundBlendMode: BlendMode.overlay,
           ),
         ),
         Column(
@@ -146,7 +145,6 @@ class _EventDetailPageState extends State<EventDetailPage> {
                 )
               ],
             ),
-            SizedBox(height: 23),
           ],
         ),
       ],
