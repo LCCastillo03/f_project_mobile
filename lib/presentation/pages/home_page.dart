@@ -60,6 +60,7 @@ class HomePage extends StatelessWidget {
               // Search bar
               SearchItem(
                 onChanged: (value) {}, // TODO: implement search
+                backgroundColor: Colors.transparent,
               ),
             ],
           ),
@@ -104,7 +105,7 @@ class HomePage extends StatelessWidget {
                     date: events[index].date,
                     location: events[index].location,
                     onTap: () =>
-                        EventsController.navigateTo(context, events[index]),
+                        EventsNavController.navigateTo(context, events[index]),
                   ),
                 ),
               );

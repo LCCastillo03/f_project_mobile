@@ -6,16 +6,17 @@ class EventModel {
   final String description;
   final String category;
   /* One of:
-  - Healthcare & Medicine
-  - Business & Finance
-  - Science & Engineering
-  - Education & Learning
-  - Personal Growth & Mindfulness
+  - Healthcare
+  - Business
+  - Science
+  - Education
+  - Personal Growth
   */
   final int maxParticipants;
   final int subscribedParticipants;
   final String location;
   final double? avgRating;
+  static const List<String> categories = ["Healthcare", "Business", "Science", "Education", "Personal Growth"];
 
   EventModel({
     required this.id,

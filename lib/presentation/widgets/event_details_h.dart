@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:project/controllers/events_controller.dart';
+import 'package:project/controllers/feedback_controllers.dart';
+import 'package:project/domain/models/event_model.dart';
 import 'package:project/utils.dart';
 
 class EventDetailsH extends StatelessWidget {
-  final String eventName;
-  final String author;
-  final String month;
-  final String day;
-  final bool isfuture;
+  final EventModel event;
 
   const EventDetailsH({
     super.key,
-    required this.eventName,
-    required this.author,
-    required this.month,
-    required this.day,
-    required this.isfuture,
+    required this.event,
   });
 
   @override
@@ -24,86 +20,80 @@ class EventDetailsH extends StatelessWidget {
   CONSIDER CHANGING TO STATEFUL WIDGET
   TODO: 2 REFLECT ON LOCAL STORAGE
   */
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        children: [
-          const SizedBox(height: 15),
-          Center(
-            child: Text(
-              clipText(eventName, 30),
-              style: const TextStyle(
-                color: Colors.black87,
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Center(
-            child: Text(
-              clipText('by $author', 20),
-              style: const TextStyle(
-                color: Colors.black54,
-                fontSize: 10,
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
+    return GestureDetector(
+      onTap: () => EventsNavController.navigateTo(context, event),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        width: double.infinity,
+        alignment: Alignment.center,
+        padding: EdgeInsets.only(left: 8, right: 8, top: 15, bottom: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(spacing: 5, children: [
+              Text(
+                clipText(event.name, 18),
+                style: const TextStyle(
+                  color: Colors.black87,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  height: 0.95,
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      month,
-                      style: const TextStyle(
-                        color: Colors.black87,
-                        fontSize: 12,
-                      ),
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                clipText('by ${event.author}', 20),
+                style: const TextStyle(
+                  color: Colors.black54,
+                  fontSize: 12,
+                  height: 1,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ]),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Column(children: [
+                  Text(
+                    DateFormat('MMMM').format(event.date),
+                    style: const TextStyle(
+                      color: Colors.black87,
+                      fontSize: 13,
+                      height: 1,
                     ),
-                    Text(
-                      day,
-                      style: const TextStyle(
-                        color: Color.fromARGB(207, 72, 64, 222),
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  ),
+                  Text(
+                    event.date.day.toString(),
+                    style: const TextStyle(
+                      color: Color.fromARGB(207, 72, 64, 222),
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
-                ),
+                  ),
+                ]),
               ),
-              const SizedBox(width: 8),
-              if (isfuture) ...[
-                IconButton(
-                  icon: const Icon(
-                    Icons.access_time,
-                    color: Color.fromARGB(207, 72, 64, 222),
-                    size: 20,
-                  ),
-                  onPressed: () {},
+              IconButton(
+                icon: Icon(
+                  event.isPast()
+                      ? Icons.comment
+                      : Icons.favorite_border_rounded,
+                  color: Color.fromARGB(207, 72, 64, 222),
+                  size: 20,
                 ),
-              ] else ...[
-                IconButton(
-                  icon: const Icon(
-                    Icons.comment,
-                    color: Color.fromARGB(207, 72, 64, 222),
-                    size: 20,
-                  ),
-                  onPressed: () {},
-                ),
-              ],
-            ],
-          ),
-        ],
+                onPressed: () {
+                  event.isPast()
+                      ? FeedbackController.navigateTo(context, event)
+                      : {}; //TODO: toggle subscribe
+                },
+              ),
+            ])
+          ],
+        ),
       ),
     );
   }

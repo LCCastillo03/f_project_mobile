@@ -9,8 +9,7 @@ class FeedbackRepositoryImpl implements FeedbackRepository {
 }
 */
 import 'package:project/domain/models/event_model.dart';
-
-final now = '2025';
+import 'package:project/domain/repositories/i_event_repository.dart';
 
 List<EventModel> eventsRepo = [
   {
@@ -80,3 +79,19 @@ List<EventModel> eventsRepo = [
   }
 ].map((e) => EventModel.fromJson(e)).toList()
   ..sort((a, b) => b.date.compareTo(a.date));
+
+///
+
+class PastEventRepository implements IEventRepository {
+  @override
+  List getEvents() {
+    return eventsRepo.where((event) => event.isPast()).toList();
+  }
+}
+
+class FutureEventRepository implements IEventRepository {
+  @override
+  List getEvents() {
+    return eventsRepo.where((event) => !event.isPast()).toList();
+  }
+}
