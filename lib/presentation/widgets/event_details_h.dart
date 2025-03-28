@@ -1,140 +1,100 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:project/controllers/events_controller.dart';
+import 'package:project/controllers/feedback_controllers.dart';
+import 'package:project/domain/models/event_model.dart';
+import 'package:project/utils.dart';
 
 class EventDetailsH extends StatelessWidget {
-  final String eventName;
-  final String author;
-
-  final String imagePath;
-  final String month;
-  final String day;
-  final bool isfuture;
+  final EventModel event;
 
   const EventDetailsH({
     super.key,
-    required this.eventName,
-    required this.author,
-
-    required this.imagePath,
-    required this.month,
-    required this.day,
-    required this.isfuture,
+    required this.event,
   });
 
   @override
-Widget build(BuildContext context) {  
-  /* 
+  Widget build(BuildContext context) {
+    /* 
   TODO: 1 MAKE CLICKING ON WIDGET NAVIGATE TO EVENT DETAILS PAGE, AND ON ICON NAVIGATE TO FEEDBACK OR SUBSCRIBE 
   CONSIDER CHANGING TO STATEFUL WIDGET
   TODO: 2 REFLECT ON LOCAL STORAGE
   */
-  return Positioned(
-    width: 100,
-   
-    child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        children: [
-          const SizedBox(height: 10),
-          Container(
-            width: 60,
-            height: 60,
-            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 0, 0, 0),
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                image: AssetImage(imagePath),
-                fit: BoxFit.cover,
-                alignment: Alignment.center,
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Center(
-            child: Text(
-              eventName,
-              style: const TextStyle(
-                color: Colors.black87,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Center(
-            child: Text(
-              'by $author',
-              style: const TextStyle(
-                color: Colors.black54,
-                fontSize: 14,
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
+    return GestureDetector(
+      onTap: () => EventsNavController.navigateTo(context, event),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        width: double.infinity,
+        alignment: Alignment.center,
+        padding: EdgeInsets.only(left: 8, right: 8, top: 15, bottom: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(spacing: 5, children: [
+              Text(
+                clipText(event.name, 18),
+                style: const TextStyle(
+                  color: Colors.black87,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  height: 0.95,
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      month,
-                      style: const TextStyle(
-                        color: Colors.black87,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      day,
-                      style: const TextStyle(
-                        color: Color.fromARGB(207, 72, 64, 222),
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
+                textAlign: TextAlign.center,
               ),
-              const SizedBox(width: 8), 
-              if (isfuture) ...[
-                 IconButton(
-                    icon: const Icon(
-                      Icons.access_time,
+              Text(
+                clipText('by ${event.author}', 20),
+                style: const TextStyle(
+                  color: Colors.black54,
+                  fontSize: 12,
+                  height: 1,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ]),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Column(children: [
+                  Text(
+                    DateFormat('MMMM').format(event.date),
+                    style: const TextStyle(
+                      color: Colors.black87,
+                      fontSize: 13,
+                      height: 1,
+                    ),
+                  ),
+                  Text(
+                    event.date.day.toString(),
+                    style: const TextStyle(
                       color: Color.fromARGB(207, 72, 64, 222),
-                      size: 30,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
                     ),
-                    onPressed: () {
-                    
-                    },
                   ),
-              ]else ...[
-                IconButton(
-                  icon: const Icon(
-                    Icons.comment,
-                    color: Color.fromARGB(207, 72, 64, 222),
-                    size: 30,
-                  ),
-                  onPressed: () {
-                    
-                  },
+                ]),
+              ),
+              IconButton(
+                icon: Icon(
+                  event.isPast()
+                      ? Icons.comment
+                      : Icons.favorite_border_rounded,
+                  color: Color.fromARGB(207, 72, 64, 222),
+                  size: 20,
                 ),
-              ],
-             
-            ],
-          ),
-        ],
+                onPressed: () {
+                  event.isPast()
+                      ? FeedbackController.navigateTo(context, event)
+                      : {}; //TODO: toggle subscribe
+                },
+              ),
+            ])
+          ],
+        ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 }

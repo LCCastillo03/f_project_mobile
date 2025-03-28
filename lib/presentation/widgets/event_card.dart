@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/utils.dart';
 
 class EventCard extends StatefulWidget {
   final String imagePath;
@@ -6,7 +7,7 @@ class EventCard extends StatefulWidget {
   final String day;
   final String eventName;
   final String author;
-  final int distance;
+  final DateTime date;
   final String location;
   final VoidCallback onTap;
   final bool isInitiallySubscribed;
@@ -18,7 +19,7 @@ class EventCard extends StatefulWidget {
     required this.day,
     required this.eventName,
     required this.author,
-    required this.distance,
+    required this.date,
     required this.location,
     required this.onTap,
     this.isInitiallySubscribed = false,
@@ -94,15 +95,15 @@ class _EventCardState extends State<EventCard> {
             ),
             // 📌 Detalles del evento con el corazón a la derecha del nombre
             Positioned(
-              bottom: 20,
-              left: 10,
-              right: 10,
+              bottom: 15,
+              left: 15,
+              right: 15,
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(13),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,10 +111,11 @@ class _EventCardState extends State<EventCard> {
                     // 📌 Fila con el nombre del evento y el corazón
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: Text(
-                            widget.eventName.length > 30 ? '${widget.eventName.substring(0, 30)}...' : widget.eventName,
+                            clipText(widget.eventName, 20),
                             style: const TextStyle(
                               color: Colors.black87,
                               fontSize: 18,
@@ -134,28 +136,27 @@ class _EventCardState extends State<EventCard> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
                     Text(
-                      'By ${widget.author.length > 30 ? '${widget.author.substring(0, 30)}...' : widget.author}',
+                      clipText('By ${widget.author}', 20),
                       style: const TextStyle(
                         color: Colors.black54,
                         fontSize: 14,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 3),
                     // 📌 Ubicación y distancia
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          widget.location.length > 30 ? '${widget.location.substring(0, 30)}...' : widget.location,
+                          clipText(widget.location, 20), 
                           style: const TextStyle(
                             color: Colors.black54,
                             fontSize: 12,
                           ),
                         ),
                         Text(
-                          _getTimeDistance(),
+                          getTimestamp(widget.date),
                           style: const TextStyle(
                             color: Colors.black54,
                             fontSize: 12,
@@ -171,15 +172,5 @@ class _EventCardState extends State<EventCard> {
         ),
       ),
     );
-  }
-
-  String _getTimeDistance() {
-    if (widget.distance == 0) {
-      return 'Today';
-    } else if (widget.distance < 0) {
-      return '${widget.distance*-1} days ago';
-    } else {
-      return '${widget.distance} days away';
-    }
   }
 }

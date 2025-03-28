@@ -1,21 +1,25 @@
 class EventModel {
+  final String id;
   final String name;
   final String author;
   final DateTime date;
   final String description;
   final String category;
   /* One of:
-  - Healthcare & Medicine
-  - Business & Finance
-  - Science & Engineering
-  - Education & Learning
-  - Personal Growth & Mindfulness
+  - Healthcare
+  - Business
+  - Science
+  - Education
+  - Personal Growth
   */
   final int maxParticipants;
   final int subscribedParticipants;
   final String location;
+  final double? avgRating;
+  static const List<String> categories = ["Healthcare", "Business", "Science", "Education", "Personal Growth"];
 
   EventModel({
+    required this.id,
     required this.name,
     required this.author,
     required this.date,
@@ -24,11 +28,12 @@ class EventModel {
     required this.maxParticipants,
     required this.subscribedParticipants,
     required this.location,
+    this.avgRating,
   });
 
-  // Factory constructor to create an instance of EventModel from JSON
   factory EventModel.fromJson(Map<String, dynamic> json) {
     return EventModel(
+      id: json['id'],
       name: json['name'],
       author: json['author'],
       date: DateTime.parse(json['date']),
@@ -37,12 +42,13 @@ class EventModel {
       maxParticipants: json['maxParticipants'],
       subscribedParticipants: json['subscribedParticipants'],
       location: json['location'],
+      avgRating: json['avgRating'],
     );
   }
 
-  // Method to convert EventModel instance back to JSON
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'name': name,
       'author': author,
       'date': date.toIso8601String(),
@@ -51,6 +57,7 @@ class EventModel {
       'maxParticipants': maxParticipants,
       'subscribedParticipants': subscribedParticipants,
       'location': location,
+      'avgRating': avgRating,
     };
   }
 
