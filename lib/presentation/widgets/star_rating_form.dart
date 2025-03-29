@@ -11,13 +11,13 @@ class StarRatingForm extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: List.generate(5, (index) {
-        return IconButton(
-          icon: Icon(
+        return GestureDetector(
+          child: Icon(
             Icons.star,
             color: index < selectedRating ? Color(0xFFFFC765) : Color.fromARGB(157, 224, 184, 113),
-            size: 60,
+            size: 55,
           ),
-          onPressed: () => onRatingSelected(index + 1),
+          onTap: () => onRatingSelected(index + 1),
         );
       }),
     );
