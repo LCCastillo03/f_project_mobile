@@ -16,8 +16,7 @@ class EventModel {
   final int subscribedParticipants;
   final String location;
   final double? avgRating;
-  static const List<String> categories = ["Healthcare", "Business", "Science", "Education", "Personal Growth"];
-
+  
   EventModel({
     required this.id,
     required this.name,

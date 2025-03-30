@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/presentation/theme/app_colors.dart';
 
 class SearchItem extends StatelessWidget {
   final ValueChanged<String> onChanged;
@@ -21,7 +22,7 @@ class SearchItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         spacing: 10,
         children: [
-          const Icon(Icons.search, color: Color(0xFFFBB385)),
+          const Icon(Icons.search, color: AppColors.dimOrange),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 11),

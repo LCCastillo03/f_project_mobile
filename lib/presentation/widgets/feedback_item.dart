@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/domain/models/feedback_model.dart';
+import 'package:project/presentation/theme/app_colors.dart';
 import 'package:project/utils.dart';
 
 class FeedbackItem extends StatefulWidget {
@@ -109,7 +110,7 @@ class _FeedbackItemState extends State<FeedbackItem> {
                                 ? Icons.thumb_up
                                 : Icons.thumb_up_off_alt,
                             color: upvoted
-                                ? const Color(0xFF443072)
+                                ? AppColors.mediumPurple
                                 : Colors.grey,
                           ),
                           onPressed: toggleUpvote,
@@ -120,7 +121,7 @@ class _FeedbackItemState extends State<FeedbackItem> {
                                 ? Icons.thumb_down
                                 : Icons.thumb_down_off_alt,
                             color: downvoted
-                                ? const Color(0xFF443072)
+                                ? AppColors.mediumPurple
                                 : Colors.grey,
                           ),
                           onPressed: toggleDownvote,
@@ -149,7 +150,7 @@ class _FeedbackItemState extends State<FeedbackItem> {
         5,
         (index) => Icon(
           index < rating ? Icons.star : Icons.star_border,
-          color: Color(0XFFF18262),
+          color: AppColors.brightOrange,
           size: 16,
         ),
       ),

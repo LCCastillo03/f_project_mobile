@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:project/controllers/feedback_controllers.dart';
 import 'package:project/domain/models/event_model.dart';
+import 'package:project/presentation/theme/app_colors.dart';
 import 'package:project/utils.dart';
-import '../widgets/agenda_item.dart';
 
 class EventDetailPage extends StatefulWidget {
   final EventModel event;
@@ -46,7 +46,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
         ),
         toolbarHeight: 58,
       ),
-      backgroundColor: const Color(0xFF2e1c53),
+      backgroundColor: AppColors.darkPurple,
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -101,8 +101,8 @@ class _EventDetailPageState extends State<EventDetailPage> {
               colors: [
                 Colors.transparent, 
                 Colors.transparent, 
-                Color(0xFF2e1c53).withValues(alpha: 0.6), 
-                Color(0xFF2e1c53), 
+                AppColors.darkPurple.withValues(alpha: 0.6), 
+                AppColors.darkPurple, 
               ],
             ),
           ),
@@ -157,7 +157,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
       alignment: Alignment.center,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF443072),
+        color: AppColors.mediumPurple,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -191,7 +191,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
               "assets/icons/${subscribed ? 'calendar_joined' : 'calendar_empty'}.svg",
               width: 30.0,
               height: 30.0,
-              colorFilter: const ColorFilter.mode(Color(0xFFf1c67a), BlendMode.srcIn),
+              colorFilter: const ColorFilter.mode(AppColors.dimYellow, BlendMode.srcIn),
             ),
           ),
         ],
@@ -262,7 +262,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           decoration: BoxDecoration(
-            color: const Color(0xFF443072), 
+            color: AppColors.mediumPurple, 
             borderRadius: BorderRadius.circular(12), 
           ),
           child: Row(
@@ -290,7 +290,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFff5757),
+                  backgroundColor: AppColors.brightRed,
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -317,11 +317,11 @@ class _EventDetailPageState extends State<EventDetailPage> {
     return IntrinsicHeight(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 16),
-        color: const Color.fromRGBO(46, 28, 83, 0.4),
+        color: AppColors.darkPurple.withAlpha(120),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           decoration: BoxDecoration(
-            color: const Color(0xFF443072), 
+            color: AppColors.mediumPurple, 
             borderRadius: BorderRadius.circular(12), 
           ),
           child: Row(
@@ -354,7 +354,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                         padding: const EdgeInsets.only(bottom: 3),
                         child: Icon(
                           Icons.star,
-                          color: Color(0xFFf1c67a),
+                          color: AppColors.dimYellow,
                         ),
                       )
                     ],
@@ -363,7 +363,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFff5757),
+                  backgroundColor: AppColors.brightRed,
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),

@@ -10,7 +10,7 @@ class FutureEventListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return EventListPage(
       controller: EventsController(repository: FutureEventRepository()),
-      backgroundImage: "assets/images/olasmoradas.png",
+      backgroundImage: "assets/images/background-blobs.png",
     );
   }
 }

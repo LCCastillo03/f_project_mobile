@@ -36,20 +36,20 @@ class EventDetailsH extends StatelessWidget {
           children: [
             Column(spacing: 5, children: [
               Text(
-                clipText(event.name, 18),
+                clipText(event.name, 15),
                 style: const TextStyle(
                   color: Colors.black87,
-                  fontSize: 14,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   height: 0.95,
                 ),
                 textAlign: TextAlign.center,
               ),
               Text(
-                clipText('by ${event.author}', 20),
+                clipText('By ${event.author}', 18),
                 style: const TextStyle(
                   color: Colors.black54,
-                  fontSize: 12,
+                  fontSize: 14,
                   height: 1,
                 ),
                 textAlign: TextAlign.center,
@@ -63,7 +63,7 @@ class EventDetailsH extends StatelessWidget {
                     DateFormat('MMMM').format(event.date),
                     style: const TextStyle(
                       color: Colors.black87,
-                      fontSize: 13,
+                      fontSize: 14,
                       height: 1,
                     ),
                   ),
@@ -71,7 +71,7 @@ class EventDetailsH extends StatelessWidget {
                     event.date.day.toString(),
                     style: const TextStyle(
                       color: Color.fromARGB(207, 72, 64, 222),
-                      fontSize: 11,
+                      fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -91,7 +91,7 @@ class EventDetailsH extends StatelessWidget {
                       : {}; //TODO: toggle subscribe
                 },
               ),
-            ])
+            ]),
           ],
         ),
       ),

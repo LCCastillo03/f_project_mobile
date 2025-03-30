@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project/data/repositories/events_repository.dart';
 import 'package:project/domain/models/event_model.dart';
+import 'package:project/presentation/theme/app_colors.dart';
 import 'package:project/utils.dart';
 import 'package:provider/provider.dart';
 import '../widgets/search_item.dart';
@@ -41,7 +42,7 @@ class HomePage extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          color: const Color(0xFFFEF2EE),
+          color: AppColors.sand,
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
