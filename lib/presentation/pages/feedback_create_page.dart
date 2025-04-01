@@ -157,7 +157,7 @@ class _FeedbackCreatePageState extends State<FeedbackCreatePage> {
                       // Submit button
                       Center(
                         child: ElevatedButton(
-                          // TODO: HANDLE FORM SUBMISSION (linked to widget.eventId)
+                          // TODO: HANDLE FORM SUBMISSION (linked to eventId)
                           onPressed: () => {},
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,

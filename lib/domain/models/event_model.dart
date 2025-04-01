@@ -16,6 +16,7 @@ class EventModel {
   final int subscribedParticipants;
   final String location;
   final double? avgRating;
+  bool subscribed;
   
   EventModel({
     required this.id,
@@ -27,7 +28,8 @@ class EventModel {
     required this.maxParticipants,
     required this.subscribedParticipants,
     required this.location,
-    this.avgRating,
+    this.avgRating = 0,
+    this.subscribed = false,
   });
 
   factory EventModel.fromJson(Map<String, dynamic> json) {

@@ -4,7 +4,9 @@ class FeedbackModel {
   final DateTime date;
   final String content;
   final int rating;
-  final int votes;
+  int votes;
+  bool upvoted;
+  bool downvoted;
 
   FeedbackModel({
     required this.username,
@@ -12,7 +14,9 @@ class FeedbackModel {
     required this.date,
     required this.content,
     required this.rating,
-    required this.votes,
+    this.votes = 0,
+    this.upvoted = false,
+    this.downvoted = false,
   });
 
   factory FeedbackModel.fromJson(Map<String, dynamic> json) {
@@ -48,5 +52,5 @@ class FeedbackCreate extends FeedbackModel {
     required super.profilePic,
     required super.content,
     required super.rating,
-  }) : super(date: DateTime.now(), votes: 0);
+  }) : super(date: DateTime.now(), votes: 0, upvoted: false, downvoted: false);
 }

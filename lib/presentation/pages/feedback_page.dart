@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:project/data/repositories/feedback_repository.dart';
+import 'package:get/get.dart';
 import 'package:project/domain/models/event_model.dart';
-import 'package:project/domain/models/feedback_model.dart';
 import 'package:project/presentation/widgets/feedback_item.dart';
 import 'package:project/controllers/feedback_controllers.dart';
 
 class FeedbackPage extends StatelessWidget {
-  late List<FeedbackModel> feedbackList;
+  final FeedbackController controller = Get.find();
   final EventModel event;
 
-  FeedbackPage({super.key, required this.event}) {
-    feedbackList = feedbackRepo; // TODO: fetch feedback for eventId
-  }
+  FeedbackPage({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +50,7 @@ class FeedbackPage extends StatelessWidget {
 
   Widget _buildAddButton(BuildContext context) {
     return GestureDetector(
-      onTap: () => FeedbackController.navigateToCreate(context, event.id),
+      onTap: () => controller.navigateToCreate(context, event.id),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -119,15 +116,17 @@ class FeedbackPage extends StatelessWidget {
         ),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-      child: ListView.builder(
+      child: Obx(() => ListView.builder(
         padding: EdgeInsets.all(0),
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: feedbackList.length,
+        itemCount: controller.feedbackList.length,
         itemBuilder: (context, index) {
-          return FeedbackItem(feedback: feedbackList[index]);
+          return FeedbackItem(
+            index: index,
+          );
         },
-      ),
+      )),
     );
   }
 }

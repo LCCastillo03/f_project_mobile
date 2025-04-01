@@ -1,82 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:project/controllers/events_controller.dart';
 import 'package:project/controllers/feedback_controllers.dart';
-import 'package:project/domain/models/event_model.dart';
 import 'package:project/presentation/theme/app_colors.dart';
 import 'package:project/utils.dart';
 
-class EventDetailPage extends StatefulWidget {
-  final EventModel event;
+class EventDetailPage extends StatelessWidget {
+  final int index;
 
-  const EventDetailPage({super.key, required this.event});
-
-  @override
-  State<EventDetailPage> createState() => _EventDetailPageState();
-}
-
-class _EventDetailPageState extends State<EventDetailPage> {
-  late String imagePath;
-  bool subscribed = false;
-
-  void handleSubscribe() {
-    setState(() {
-      // TODO: AFFECT LOCAL STORAGE
-      subscribed = !subscribed;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    imagePath = widget.event.eventDecorationImagePath();
-  }
+  EventDetailPage({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true, // Allows app bar to lay over body
-      floatingActionButton: widget.event.isPast() ? _buildPastFooter() : _buildFutureFooter(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      appBar: AppBar(
-        forceMaterialTransparency: true,
-        iconTheme: IconThemeData(
-          size: 30,
-          color: Colors.white,
+    EventsController evController = Get.find();
+    return Obx(() {
+      final event = evController.events[index];
+      return Scaffold(
+        extendBodyBehindAppBar: true, // Allows app bar to lay over body
+        floatingActionButton: event.isPast()
+            ? _buildPastFooter(context, event)
+            : _buildFutureFooter(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        appBar: AppBar(
+          forceMaterialTransparency: true,
+          iconTheme: IconThemeData(
+            size: 30,
+            color: Colors.white,
+          ),
+          toolbarHeight: 58,
         ),
-        toolbarHeight: 58,
-      ),
-      backgroundColor: AppColors.darkPurple,
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildHeader(),
-                Center(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildEventSchedule(),
-                        const SizedBox(height: 30),
-                        _buildEventDescription(),
-                      ],
+        backgroundColor: AppColors.darkPurple,
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildHeader(
+                    imagePath: event.eventDecorationImagePath(),
+                    name: event.name,
+                    author: event.author,
+                    location: event.location,
+                  ),
+                  Center(
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 35, vertical: 30),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildEventSchedule(
+                              date: event.date, isSubscribed: event.subscribed),
+                          const SizedBox(height: 30),
+                          _buildEventDescription(event.description),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 95),
-              ],
+                  const SizedBox(height: 95),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader({imagePath, name, author, location}) {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -99,10 +92,10 @@ class _EventDetailPageState extends State<EventDetailPage> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Colors.transparent, 
-                Colors.transparent, 
-                AppColors.darkPurple.withValues(alpha: 0.6), 
-                AppColors.darkPurple, 
+                Colors.transparent,
+                Colors.transparent,
+                AppColors.darkPurple.withValues(alpha: 0.6),
+                AppColors.darkPurple,
               ],
             ),
           ),
@@ -112,7 +105,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              clipText(widget.event.name, 27),
+              clipText(name, 27),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -120,7 +113,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
               ),
             ),
             Text(
-              clipText('By ${widget.event.author}', 35),
+              clipText('By $author', 35),
               style: TextStyle(
                 color: Colors.white54,
                 fontWeight: FontWeight.bold,
@@ -137,7 +130,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                   size: 16,
                 ),
                 Text(
-                  clipText(widget.event.location, 40),
+                  clipText(location, 40),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white54,
@@ -151,7 +144,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
     );
   }
 
-  Widget _buildEventSchedule() {
+  Widget _buildEventSchedule({date, isSubscribed}) {
     return Container(
       width: double.infinity,
       alignment: Alignment.center,
@@ -166,7 +159,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
         children: [
           // Month, day
           Text(
-            '${DateFormat('MMMM').format(widget.event.date)}\n${widget.event.date.day}',
+            '${DateFormat('MMMM').format(date)}\n${date.day}',
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
@@ -177,7 +170,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
           ),
           // Weekday \ time
           Text(
-            '${DateFormat('EEEE').format(widget.event.date)}\n${widget.event.date.hour}:${widget.event.date.minute > 9 ? widget.event.date.minute : '0${widget.event.date.minute}'}',
+            '${DateFormat('EEEE').format(date)}\n${date.hour}:${date.minute > 9 ? date.minute : '0${date.minute}'}',
             style: TextStyle(
               color: Colors.white70,
               fontSize: 16,
@@ -188,10 +181,11 @@ class _EventDetailPageState extends State<EventDetailPage> {
           Padding(
             padding: const EdgeInsets.only(right: 10, left: 8),
             child: SvgPicture.asset(
-              "assets/icons/${subscribed ? 'calendar_joined' : 'calendar_empty'}.svg",
+              "assets/icons/${isSubscribed ? 'calendar_joined' : 'calendar_empty'}.svg",
               width: 30.0,
               height: 30.0,
-              colorFilter: const ColorFilter.mode(AppColors.dimYellow, BlendMode.srcIn),
+              colorFilter:
+                  const ColorFilter.mode(AppColors.dimYellow, BlendMode.srcIn),
             ),
           ),
         ],
@@ -241,11 +235,11 @@ class _EventDetailPageState extends State<EventDetailPage> {
     );
   }*/
 
-  Widget _buildEventDescription() {
+  Widget _buildEventDescription(description) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Text(
-        widget.event.description,
+        description,
         textAlign: TextAlign.justify,
         style: TextStyle(
           color: Colors.white,
@@ -255,65 +249,72 @@ class _EventDetailPageState extends State<EventDetailPage> {
   }
 
   Widget _buildFutureFooter() {
-    return IntrinsicHeight(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 16),
-        color: const Color.fromRGBO(46, 28, 83, 0.6),
+    EventsController evController = Get.find();
+    return Obx(() {
+      return IntrinsicHeight(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          decoration: BoxDecoration(
-            color: AppColors.mediumPurple, 
-            borderRadius: BorderRadius.circular(12), 
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Available spots',
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 14,
+          padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 16),
+          color: const Color.fromRGBO(46, 28, 83, 0.6),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            decoration: BoxDecoration(
+              color: AppColors.mediumPurple,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Available spots',
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                      ),
+                    ),
+                    Text(
+                      '${evController.events[index].subscribedParticipants}/${evController.events[index].maxParticipants}',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.brightRed,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  Text(
-                    '${widget.event.subscribedParticipants}/${widget.event.maxParticipants}',
+                  onPressed: () => evController.toggleSubscription(index),
+                  child: Text(
+                    evController.events[index].subscribed
+                        ? 'Unsubscribe'
+                        : 'Subscribe',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ],
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.brightRed,
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
                 ),
-                onPressed: () => handleSubscribe(),
-                child: Text(
-                  subscribed ? 'Unsubscribe': 'Subscribe',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
-  Widget _buildPastFooter() {
+  Widget _buildPastFooter(context, event) {
+    FeedbackController fbController = Get.find();
     return IntrinsicHeight(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 16),
@@ -321,8 +322,8 @@ class _EventDetailPageState extends State<EventDetailPage> {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           decoration: BoxDecoration(
-            color: AppColors.mediumPurple, 
-            borderRadius: BorderRadius.circular(12), 
+            color: AppColors.mediumPurple,
+            borderRadius: BorderRadius.circular(12),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -343,7 +344,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        widget.event.avgRating.toString(),
+                        event.avgRating.toString(),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -364,12 +365,13 @@ class _EventDetailPageState extends State<EventDetailPage> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.brightRed,
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                onPressed: () => FeedbackController.navigateTo(context, widget.event),  // TODO: Redirect to feedback page
+                onPressed: () => fbController.navigateTo(context, event),
                 child: Text(
                   'Reviews',
                   style: TextStyle(

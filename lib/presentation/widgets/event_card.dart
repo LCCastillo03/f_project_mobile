@@ -1,176 +1,145 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:project/controllers/events_controller.dart';
 import 'package:project/utils.dart';
 
-class EventCard extends StatefulWidget {
-  final String imagePath;
-  final String month;
-  final String day;
-  final String eventName;
-  final String author;
-  final DateTime date;
-  final String location;
-  final VoidCallback onTap;
-  final bool isInitiallySubscribed;
+class EventCard extends StatelessWidget {
+  final int index;
+  final EventsController controller = Get.find();
 
-  const EventCard({
-    super.key,
-    required this.imagePath,
-    required this.month,
-    required this.day,
-    required this.eventName,
-    required this.author,
-    required this.date,
-    required this.location,
-    required this.onTap,
-    this.isInitiallySubscribed = false,
-  });
-
-  @override
-  _EventCardState createState() => _EventCardState();
-}
-
-class _EventCardState extends State<EventCard> {
-  late bool isSubscribed;
-
-  @override
-  void initState() {
-    super.initState();
-    isSubscribed = widget.isInitiallySubscribed;
-  }
-
-  void toggleSubscription() {
-    setState(() { // TODO: REFLECT ON LOCAL STORAGE
-      isSubscribed = !isSubscribed;
-    });
-  }
+  EventCard({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget.onTap,
-      child: Container(
-        width: 300,
-        height: 360,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          image: DecorationImage(
-            image: AssetImage(widget.imagePath),
-            fit: BoxFit.cover,
-            alignment: Alignment.center,
+    return Obx(() {
+      final event = controller.events[index];
+      return GestureDetector(
+        onTap: () => controller.navigateTo(context, index),
+        child: Container(
+          width: 300,
+          height: 360,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            image: DecorationImage(
+              image: AssetImage(event.eventDecorationImagePath()),
+              fit: BoxFit.cover,
+              alignment: Alignment.center,
+            ),
+          ),
+          child: Stack(
+            children: [
+              // 📌 Fecha del evento
+              Positioned(
+                top: 15,
+                left: 15,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        DateFormat('MMMM').format(event.date),
+                        style: const TextStyle(
+                          color: Colors.black87,
+                          fontSize: 14,
+                        ),
+                      ),
+                      Text(
+                        event.date.day.toString(),
+                        style: const TextStyle(
+                          color: Color.fromARGB(207, 72, 64, 222),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // 📌 Detalles del evento con el corazón a la derecha del nombre
+              Positioned(
+                bottom: 15,
+                left: 15,
+                right: 15,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(13),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // 📌 Fila con el nombre del evento y el corazón
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              clipText(event.name, 20),
+                              style: const TextStyle(
+                                color: Colors.black87,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () => controller.toggleSubscription(index),
+                            child: Icon(
+                              controller.events[index].subscribed
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              color: Colors.purple,
+                              size: 24,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        clipText('By ${event.author}', 20),
+                        style: const TextStyle(
+                          color: Colors.black54,
+                          fontSize: 14,
+                        ),
+                      ),
+                      SizedBox(height: 3),
+                      // 📌 Ubicación y distancia
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            clipText(event.location, 20),
+                            style: const TextStyle(
+                              color: Colors.black54,
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            getTimestamp(event.date),
+                            style: const TextStyle(
+                              color: Colors.black54,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-        child: Stack(
-          children: [
-            // 📌 Fecha del evento
-            Positioned(
-              top: 15,
-              left: 15,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      widget.month,
-                      style: const TextStyle(
-                        color: Colors.black87,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      widget.day,
-                      style: const TextStyle(
-                        color: Color.fromARGB(207, 72, 64, 222),
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            // 📌 Detalles del evento con el corazón a la derecha del nombre
-            Positioned(
-              bottom: 15,
-              left: 15,
-              right: 15,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(13),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // 📌 Fila con el nombre del evento y el corazón
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            clipText(widget.eventName, 20),
-                            style: const TextStyle(
-                              color: Colors.black87,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: toggleSubscription,
-                          child: Icon(
-                            isSubscribed
-                                ? Icons.favorite
-                                : Icons.favorite_border,
-                            color: Colors.purple, // Corazón morado
-                            size: 24,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      clipText('By ${widget.author}', 20),
-                      style: const TextStyle(
-                        color: Colors.black54,
-                        fontSize: 14,
-                      ),
-                    ),
-                    SizedBox(height: 3),
-                    // 📌 Ubicación y distancia
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          clipText(widget.location, 20), 
-                          style: const TextStyle(
-                            color: Colors.black54,
-                            fontSize: 12,
-                          ),
-                        ),
-                        Text(
-                          getTimestamp(widget.date),
-                          style: const TextStyle(
-                            color: Colors.black54,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+      );
+    });
   }
 }
