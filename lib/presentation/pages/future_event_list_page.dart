@@ -5,14 +5,14 @@ import 'package:project/presentation/pages/event_list_page.dart';
 
 class FutureEventListPage extends StatelessWidget {
   final EventsController controller = Get.find();
-  
+
   FutureEventListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return EventListPage(
       isPast: false,
-      backgroundImage: "assets/images/background-blobs.png",
+      backgroundImage: "assets/images/4.png",
     );
   }
 }
