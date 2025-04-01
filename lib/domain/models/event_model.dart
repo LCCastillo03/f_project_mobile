@@ -44,6 +44,7 @@ class EventModel {
       subscribedParticipants: json['subscribedParticipants'],
       location: json['location'],
       avgRating: json['avgRating'],
+      subscribed: json['subscribed'] ?? false,
     );
   }
 

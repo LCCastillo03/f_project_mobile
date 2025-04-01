@@ -24,10 +24,6 @@ class EventsController extends GetxController {
     events.refresh();
   }
 
-  List getTimeEvents(bool isPast) {
-    return events.where((event) => (isPast ? event.isPast() : !event.isPast())).toList();
-  }
-
   List getFilteredEvents(bool isPast) {
     if (selectedCategory.value == "All") {
       return events
@@ -49,6 +45,18 @@ class EventsController extends GetxController {
               "event": entry.value // Event object
             })
         .toList();
+  }
+
+  List getSubscribedEvents() {
+    return events
+        .asMap()
+        .entries
+        .where((entry) => entry.value.subscribed == true)
+        .map((entry) => {
+              "index": entry.key, // Original index before filtering
+              "event": entry.value // Event object
+            })
+        .toList(); 
   }
 
   void navigateTo(BuildContext context, int index) {

@@ -84,14 +84,15 @@ class HomePage extends StatelessWidget {
         return SizedBox(
           height: 380,
           child: Obx(() {
+            final events = controller.getSubscribedEvents();
             return PageView.builder(
               controller: PageController(viewportFraction: 0.75),
-              itemCount: controller.events.length,
+              itemCount: events.length,
               itemBuilder: (context, index) {
                 return Center(
                   child: SizedBox(
                     width: constraints.maxWidth * 0.7,
-                    child: EventCard(index: index),
+                    child: EventCard(event: events[index]["event"], index: events[index]["index"]),
                   ),
                 );
               },
