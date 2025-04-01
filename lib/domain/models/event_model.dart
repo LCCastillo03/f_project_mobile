@@ -16,8 +16,8 @@ class EventModel {
   final int subscribedParticipants;
   final String location;
   final double? avgRating;
-  static const List<String> categories = ["Healthcare", "Business", "Science", "Education", "Personal Growth"];
-
+  bool subscribed;
+  
   EventModel({
     required this.id,
     required this.name,
@@ -28,7 +28,8 @@ class EventModel {
     required this.maxParticipants,
     required this.subscribedParticipants,
     required this.location,
-    this.avgRating,
+    this.avgRating = 0,
+    this.subscribed = false,
   });
 
   factory EventModel.fromJson(Map<String, dynamic> json) {

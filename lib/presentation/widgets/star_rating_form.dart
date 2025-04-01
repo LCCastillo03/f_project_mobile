@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/presentation/theme/app_colors.dart';
 
 class StarRatingForm extends StatelessWidget {
   final int selectedRating;
@@ -14,7 +15,7 @@ class StarRatingForm extends StatelessWidget {
         return GestureDetector(
           child: Icon(
             Icons.star,
-            color: index < selectedRating ? Color(0xFFFFC765) : Color.fromARGB(157, 224, 184, 113),
+            color: index < selectedRating ? AppColors.brightYellow : AppColors.brightYellow.withAlpha(157),
             size: 55,
           ),
           onTap: () => onRatingSelected(index + 1),

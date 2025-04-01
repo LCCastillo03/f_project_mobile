@@ -81,7 +81,7 @@ List<EventModel> eventsRepo = [
   ..sort((a, b) => b.date.compareTo(a.date));
 
 ///
-
+/*
 class PastEventRepository implements IEventRepository {
   @override
   List getEvents() {
@@ -95,3 +95,11 @@ class FutureEventRepository implements IEventRepository {
     return eventsRepo.where((event) => !event.isPast()).toList();
   }
 }
+
+class FullRepository implements IEventRepository {
+  @override
+  List getEvents() {
+    return eventsRepo;
+  }
+}
+*/

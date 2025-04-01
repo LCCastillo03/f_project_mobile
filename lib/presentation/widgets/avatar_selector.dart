@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/presentation/theme/app_colors.dart';
 import 'package:project/utils.dart';
 
 class AvatarSelector extends StatelessWidget {
@@ -17,7 +18,7 @@ class AvatarSelector extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: Color(0xFF2E1C53), // Background color
+        color: AppColors.darkPurple, // Background color
       ),
       child: Column(
         spacing: 15,
@@ -38,7 +39,7 @@ class AvatarSelector extends StatelessWidget {
                 onTap: () => onAvatarSelected(avatarPath),
                 child: CircleAvatar(
                   backgroundColor: selectedAvatar == avatarPath
-                      ? Color(0xFFFFC765)
+                      ? AppColors.brightYellow
                       : Colors.white,
                   radius: 28,
                   child: CircleAvatar(

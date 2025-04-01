@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/presentation/theme/app_colors.dart';
 
 class AgendaItem extends StatelessWidget {
   final String title;
@@ -22,7 +23,7 @@ class AgendaItem extends StatelessWidget {
       margin: const EdgeInsets.only(right: 12),
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: const Color(0xFF443072),
+        color: AppColors.mediumPurple,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(

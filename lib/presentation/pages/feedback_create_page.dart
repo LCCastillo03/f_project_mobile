@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/presentation/theme/app_colors.dart';
 import 'package:project/presentation/widgets/avatar_selector.dart';
 import 'package:project/presentation/widgets/comment_input.dart';
 import 'package:project/presentation/widgets/star_rating_form.dart';
@@ -67,7 +68,7 @@ class _FeedbackCreatePageState extends State<FeedbackCreatePage> {
                         // Avatar Selected
                         CircleAvatar(
                           radius: 60,
-                          backgroundColor: Color(0xFFFFC765),
+                          backgroundColor: AppColors.brightYellow,
                           child: CircleAvatar(
                             backgroundImage:
                                 AssetImage(imagePath),
@@ -91,7 +92,7 @@ class _FeedbackCreatePageState extends State<FeedbackCreatePage> {
                               ),
                               focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Color(0xFFFFC765),
+                                    color: AppColors.brightYellow,
                                     width: 2), // Underline color when focused
                               ),
                             ),
@@ -156,11 +157,11 @@ class _FeedbackCreatePageState extends State<FeedbackCreatePage> {
                       // Submit button
                       Center(
                         child: ElevatedButton(
-                          // TODO: HANDLE FORM SUBMISSION (linked to widget.eventId)
+                          // TODO: HANDLE FORM SUBMISSION (linked to eventId)
                           onPressed: () => {},
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
-                            backgroundColor: Color(0XFFF18262),
+                            backgroundColor: AppColors.brightOrange,
                             padding: EdgeInsets.only(
                                 top: 18, bottom: 18, left: 28, right: 18),
                           ),
