@@ -17,7 +17,7 @@ class EventModel {
   final String location;
   final double? avgRating;
   bool subscribed;
-  
+
   EventModel({
     required this.id,
     required this.name,
@@ -43,7 +43,7 @@ class EventModel {
       maxParticipants: json['maxParticipants'],
       subscribedParticipants: json['subscribedParticipants'],
       location: json['location'],
-      avgRating: json['avgRating'],
+      avgRating: (json['avgRating'] as num?)?.toDouble(),
     );
   }
 
