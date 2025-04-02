@@ -163,7 +163,7 @@ class _FeedbackCreatePageState extends State<FeedbackCreatePage> {
                             foregroundColor: Colors.white,
                             backgroundColor: AppColors.brightOrange,
                             padding: EdgeInsets.only(
-                                top: 18, bottom: 18, left: 28, right: 18),
+                                top: 14, bottom: 14, left: 28, right: 18),
                           ),
                           child: Row(
                             spacing: 15,
