@@ -114,8 +114,8 @@ Widget _buildEventView(bool fetchParam) {
       alignment: WrapAlignment.center,
       children: filteredEvents.map((e) {
         return SizedBox(
-          width: 160,
-          height: 120,
+          width: 270,
+          height: 80,
           child: EventDetailsH(index: e["index"]),
         );
       }).toList(),

@@ -31,7 +31,32 @@ class EventDetailsH extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Column(spacing: 5, children: [
+              
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 15 , top: 4),
+                  child: Column(children: [
+                    
+                    Text(
+                      DateFormat('MMMM').format(event.date),
+                      style: const TextStyle(
+                        color: Colors.black87,
+                        fontSize: 14,
+                        height: 1,
+                      ),
+                    ),
+                    Text(
+                      event.date.day.toString(),
+                      style: const TextStyle(
+                        color: Color.fromARGB(207, 72, 64, 222),
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ]),
+                ),
+                const SizedBox(width: 10),
+                Column(spacing: 5, children: [
                 Text(
                   clipText(event.name, 15),
                   style: const TextStyle(
@@ -52,28 +77,6 @@ class EventDetailsH extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ]),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Column(children: [
-                    Text(
-                      DateFormat('MMMM').format(event.date),
-                      style: const TextStyle(
-                        color: Colors.black87,
-                        fontSize: 14,
-                        height: 1,
-                      ),
-                    ),
-                    Text(
-                      event.date.day.toString(),
-                      style: const TextStyle(
-                        color: Color.fromARGB(207, 72, 64, 222),
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ]),
-                ),
                 IconButton(
                   icon: Icon(
                     event.isPast()
