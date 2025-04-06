@@ -251,6 +251,10 @@ class EventDetailPage extends StatelessWidget {
   Widget _buildFutureFooter() {
     EventsController evController = Get.find();
     return Obx(() {
+      final event = evController.events[index];
+      final bool isFull = event.subscribedParticipants >= event.maxParticipants;
+      final bool canSubscribe = !isFull || event.subscribed;
+
       return IntrinsicHeight(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 16),
@@ -275,29 +279,38 @@ class EventDetailPage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${evController.events[index].subscribedParticipants}/${evController.events[index].maxParticipants}',
+                      '${event.subscribedParticipants}/${event.maxParticipants}',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: isFull ? Colors.red : Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    if (isFull && !event.subscribed)
+                      Text(
+                        'Event is full',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 12,
+                        ),
+                      ),
                   ],
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.brightRed,
+                    backgroundColor:
+                        canSubscribe ? AppColors.brightRed : Colors.grey,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  onPressed: () => evController.toggleSubscription(index),
+                  onPressed: canSubscribe
+                      ? () => evController.toggleSubscription(index)
+                      : null,
                   child: Text(
-                    evController.events[index].subscribed
-                        ? 'Unsubscribe'
-                        : 'Subscribe',
+                    event.subscribed ? 'Unsubscribe' : 'Subscribe',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/presentation/pages/past_future_event_list_page.dart';
 import 'package:project/presentation/pages/home_page.dart';
+import 'package:project/presentation/pages/calendar_page.dart';
 
 class NavigationController extends StatefulWidget {
   const NavigationController({super.key});
@@ -14,8 +15,7 @@ class _NavigationControllerState extends State<NavigationController> {
   final List<Widget> _pages = [
     HomePage(),
     PastFutureEventListPage(),
-    // todo: Change second HomePage for calendar
-    HomePage(),
+    CalendarPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -49,8 +49,7 @@ class _NavigationControllerState extends State<NavigationController> {
             ),
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor:
-              Colors.purple,
+          selectedItemColor: Colors.purple,
           unselectedItemColor: Colors.purple.shade200,
           onTap: _onItemTapped,
         ),

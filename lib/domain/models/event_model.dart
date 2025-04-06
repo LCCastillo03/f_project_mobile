@@ -47,7 +47,7 @@ class EventModel {
       maxParticipants: json['maxParticipants'],
       subscribedParticipants: json['subscribedParticipants'],
       location: json['location'],
-      avgRating: json['avgRating'],
+      avgRating: (json['avgRating'] as num?)?.toDouble(),
       schedule: (json['schedule'] ?? [])
           .map<ScheduleItem>((item) => ScheduleItem.fromJson(item))
           .toList(),
