@@ -7,10 +7,10 @@ import '../widgets/search_item.dart';
 
 class EventListPage extends StatelessWidget {
   final String backgroundImage;
-  final bool isPast;
+ 
 
   EventListPage(
-      {super.key, required this.isPast, required this.backgroundImage});
+      {super.key,  required this.backgroundImage});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class EventListPage extends StatelessWidget {
                     SearchItem(
                         onChanged: (value) {}), // TODO: search item action?
                     _buildCategoryList(),
-                    _buildEventView(isPast),
+                    _buildEventView(),
                   ],
                 );
               }),
@@ -105,19 +105,71 @@ Widget _buildButton(String category) {
   });
 }
 
-Widget _buildEventView(bool fetchParam) {
+Widget _buildEventView() {
   final EventsController controller = Get.find();
-    final filteredEvents = controller.getFilteredEvents(fetchParam);
-    return Wrap(
-      spacing: 15,
-      runSpacing: 15,
-      alignment: WrapAlignment.center,
-      children: filteredEvents.map((e) {
-        return SizedBox(
-          width: 270,
-          height: 80,
-          child: EventDetailsH(index: e["index"]),
-        );
-      }).toList(),
+
+  final allEvents = controller.getFilteredEvents();
+  final futureEvents = allEvents.where((e) => !e["event"].isPast()).toList();
+  final pastEvents = allEvents.where((e) => e["event"].isPast()).toList();
+
+  return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (futureEvents.isNotEmpty) ...[
+          Padding(
+            padding: const EdgeInsets.only(top: 20, bottom: 10),
+            child: Center(
+              child: Text(
+                "Future Events",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          Wrap(
+            spacing: 15,
+            runSpacing: 15,
+            alignment: WrapAlignment.center,
+            children: futureEvents.map((e) {
+              return SizedBox(
+                width: double.infinity,
+                height: 80,
+                child: EventDetailsH(index: e["index"]),
+              );
+            }).toList(),
+          ),
+        ],
+        if (pastEvents.isNotEmpty) ...[
+          Padding(
+            padding: const EdgeInsets.only(top: 30, bottom: 10),
+            child: Center(
+              child: Text(
+                "Past Events",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          Wrap(
+            spacing: 15,
+            runSpacing: 15,
+            alignment: WrapAlignment.center,
+            children: pastEvents.map((e) {
+              return SizedBox(
+                width: double.infinity,
+                height: 80,
+                child: EventDetailsH(index: e["index"]),
+              );
+            }).toList(),
+          ),
+        ],
+      ],
     );
+
 }

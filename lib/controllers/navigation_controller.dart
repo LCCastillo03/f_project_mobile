@@ -1,7 +1,7 @@
 // lib/controllers/navigation_controller.dart
 
 import 'package:flutter/material.dart';
-import 'package:project/presentation/pages/future_event_list_page.dart';
+import 'package:project/presentation/pages/past_future_event_list_page.dart';
 import 'package:project/presentation/pages/home_page.dart';
 import 'package:project/presentation/pages/past_event_list_page.dart';
 
@@ -16,7 +16,8 @@ class _NavigationControllerState extends State<NavigationController> {
   int _selectedIndex = 0;
   final List<Widget> _pages = [
     HomePage(),
-    FutureEventListPage(),
+    PastFutureEventListPage(),
+    //Delete this:
     PastEventListPage(),
   ];
 

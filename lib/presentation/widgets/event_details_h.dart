@@ -34,7 +34,7 @@ class EventDetailsH extends StatelessWidget {
               
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 15 , top: 4),
+                  padding: const EdgeInsets.only(left: 15 , top: 4,right: 0),
                   child: Column(children: [
                     
                     Text(
@@ -55,28 +55,32 @@ class EventDetailsH extends StatelessWidget {
                     ),
                   ]),
                 ),
-                const SizedBox(width: 10),
-                Column(spacing: 5, children: [
-                Text(
-                  clipText(event.name, 15),
-                  style: const TextStyle(
-                    color: Colors.black87,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    height: 0.95,
-                  ),
-                  textAlign: TextAlign.center,
+                
+               Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      clipText(event.name, 20),
+                      style: const TextStyle(
+                        color: Colors.black87,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        height: 0.95,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      clipText('By ${event.author}', 18),
+                      style: const TextStyle(
+                        color: Colors.black54,
+                        fontSize: 14,
+                        height: 1,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
-                Text(
-                  clipText('By ${event.author}', 18),
-                  style: const TextStyle(
-                    color: Colors.black54,
-                    fontSize: 14,
-                    height: 1,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ]),
                 IconButton(
                   icon: Icon(
                     event.isPast()
