@@ -1,3 +1,5 @@
+import 'package:project/domain/models/schedule_item.dart';
+
 class EventModel {
   final String id;
   final String name;
@@ -17,7 +19,8 @@ class EventModel {
   final String location;
   final double? avgRating;
   bool subscribed;
-  
+  final List<ScheduleItem> schedule;
+
   EventModel({
     required this.id,
     required this.name,
@@ -30,6 +33,7 @@ class EventModel {
     required this.location,
     this.avgRating = 0,
     this.subscribed = false,
+    required this.schedule,
   });
 
   factory EventModel.fromJson(Map<String, dynamic> json) {
@@ -44,6 +48,9 @@ class EventModel {
       subscribedParticipants: json['subscribedParticipants'],
       location: json['location'],
       avgRating: json['avgRating'],
+      schedule: (json['schedule'] ?? [])
+          .map<ScheduleItem>((item) => ScheduleItem.fromJson(item))
+          .toList(),
     );
   }
 
@@ -59,6 +66,7 @@ class EventModel {
       'subscribedParticipants': subscribedParticipants,
       'location': location,
       'avgRating': avgRating,
+      'schedule': schedule.map((e) => e.toJson()).toList(),
     };
   }
 

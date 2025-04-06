@@ -24,6 +24,24 @@ List<EventModel> eventsRepo = [
     'subscribedParticipants': 2,
     'location': 'Universidad del Norte',
     'avgRating': 4.3,
+    'schedule': [
+      {
+        'time': '09:00 AM',
+        'topic': 'Introduction to the fintech world',
+        'description': 'Brief introduction to fintech trends.'
+      },
+      {
+        'time': '10:30 AM',
+        'topic': 'Blockchain in finance',
+        'description':
+            'How blockchain is applied to the current financial system.'
+      },
+      {
+        'time': '12:00 PM',
+        'topic': 'Fintechs in Latin America',
+        'description': 'Success cases in the region and current challenges.'
+      }
+    ]
   },
   {
     'id': '2',
