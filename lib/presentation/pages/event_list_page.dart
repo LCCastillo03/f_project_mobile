@@ -7,10 +7,7 @@ import '../widgets/search_item.dart';
 
 class EventListPage extends StatelessWidget {
   final String backgroundImage;
- 
-
-  EventListPage(
-      {super.key,  required this.backgroundImage});
+  EventListPage({super.key, required this.backgroundImage});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +24,9 @@ class EventListPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Obx(() { // try deleting
+              child: Obx(() {
+                // try deleting
                 return Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   spacing: 20,
                   children: [
@@ -50,7 +47,6 @@ class EventListPage extends StatelessWidget {
 }
 
 Widget _buildCategoryList() {
-  
   return IntrinsicHeight(
     child: SingleChildScrollView(
       padding: EdgeInsets.symmetric(vertical: 3),
@@ -81,12 +77,11 @@ Widget _buildButton(String category) {
       },
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(20),
           color: isSelected ? Colors.white.withAlpha(240) : Colors.white54,
         ),
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           spacing: 5,
           children: [
             category != "All"
@@ -113,63 +108,43 @@ Widget _buildEventView() {
   final pastEvents = allEvents.where((e) => e["event"].isPast()).toList();
 
   return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (futureEvents.isNotEmpty) ...[
-          Padding(
-            padding: const EdgeInsets.only(top: 20, bottom: 10),
-            child: Center(
-              child: Text(
-                "Future Events",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-          Wrap(
-            spacing: 15,
-            runSpacing: 15,
-            alignment: WrapAlignment.center,
-            children: futureEvents.map((e) {
-              return SizedBox(
-                width: double.infinity,
-                height: 80,
-                child: EventDetailsH(index: e["index"]),
-              );
-            }).toList(),
-          ),
-        ],
-        if (pastEvents.isNotEmpty) ...[
-          Padding(
-            padding: const EdgeInsets.only(top: 30, bottom: 10),
-            child: Center(
-              child: Text(
-                "Past Events",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-          Wrap(
-            spacing: 15,
-            runSpacing: 15,
-            alignment: WrapAlignment.center,
-            children: pastEvents.map((e) {
-              return SizedBox(
-                width: double.infinity,
-                height: 80,
-                child: EventDetailsH(index: e["index"]),
-              );
-            }).toList(),
-          ),
-        ],
+    spacing: 25,
+    children: [
+      if (futureEvents.isNotEmpty) ...[
+        _buildEventSublist("Future Events", futureEvents)
       ],
-    );
+      if (pastEvents.isNotEmpty) ...[
+        _buildEventSublist("Past Events", pastEvents)
+      ],
+    ],
+  );
+}
 
+Widget _buildEventSublist(title, List<dynamic> eventSublist) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: 10,
+    children: [
+      Text(
+        textAlign: TextAlign.start,
+        title,
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
+      Wrap(
+        spacing: 15,
+        runSpacing: 15,
+        alignment: WrapAlignment.center,
+        children: eventSublist.map((e) {
+          return SizedBox(
+            width: double.infinity,
+            child: EventDetailsH(index: e["index"]),
+          );
+        }).toList(),
+      ),
+    ],
+  );
 }

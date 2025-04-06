@@ -11,7 +11,6 @@ class PastFutureEventListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EventListPage(
-     
       backgroundImage: "assets/images/4.png",
     );
   }
