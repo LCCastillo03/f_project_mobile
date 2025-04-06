@@ -28,12 +28,11 @@ class EventsController extends GetxController {
     return events.where((event) => (isPast ? event.isPast() : !event.isPast())).toList();
   }
 
-  List getFilteredEvents(bool isPast) {
+  List getFilteredEvents() {
     if (selectedCategory.value == "All") {
       return events
           .asMap()
           .entries
-          .where((entry) => entry.value.isPast() == isPast)
           .map((entry) => {
                 "index": entry.key, // Original index before filtering
                 "event": entry.value // Event object
@@ -43,7 +42,7 @@ class EventsController extends GetxController {
     return events
         .asMap()
         .entries
-        .where((entry) => entry.value.category == selectedCategory.value && entry.value.isPast() == isPast)
+        .where((entry) => entry.value.category == selectedCategory.value )
         .map((entry) => {
               "index": entry.key, // Original index before filtering
               "event": entry.value // Event object

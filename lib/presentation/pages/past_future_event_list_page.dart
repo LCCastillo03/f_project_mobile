@@ -3,15 +3,14 @@ import 'package:get/get.dart';
 import 'package:project/controllers/events_controller.dart';
 import 'package:project/presentation/pages/event_list_page.dart';
 
-class FutureEventListPage extends StatelessWidget {
+class PastFutureEventListPage extends StatelessWidget {
   final EventsController controller = Get.find();
 
-  FutureEventListPage({super.key});
+  PastFutureEventListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return EventListPage(
-      isPast: false,
       backgroundImage: "assets/images/4.png",
     );
   }
