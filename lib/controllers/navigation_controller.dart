@@ -67,7 +67,7 @@ class _NavigationControllerState extends State<NavigationController>
           children: _pages,
         ),
         bottomNavigationBar: Container(
-          height: 76,
+          height: 90,
           decoration: BoxDecoration(
             color: backgroundColor,
             boxShadow: [
@@ -103,38 +103,44 @@ class _NavigationControllerState extends State<NavigationController>
       Color primaryColor, Color secondaryColor, Color inactiveColor) {
     final bool isSelected = _selectedIndex == index;
 
-    return InkWell(
-      onTap: () => _onItemTapped(index),
-      customBorder: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color:
-              isSelected ? secondaryColor.withOpacity(0.2) : Colors.transparent,
+    return Expanded(
+      // 👈 hace que cada nav item se ajuste al espacio disponible
+      child: InkWell(
+        onTap: () => _onItemTapped(index),
+        customBorder: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              color: isSelected ? primaryColor : inactiveColor,
-              size: 24,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              label,
-              style: TextStyle(
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+          decoration: BoxDecoration(
+            color: isSelected
+                ? secondaryColor.withOpacity(0.2)
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize
+                .min, // 👈 evita que la columna crezca innecesariamente
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
                 color: isSelected ? primaryColor : inactiveColor,
-                fontSize: 12,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                letterSpacing: 0.2,
+                size: 24,
               ),
-            ),
-          ],
+              const SizedBox(height: 4),
+              Text(
+                label,
+                style: TextStyle(
+                  color: isSelected ? primaryColor : inactiveColor,
+                  fontSize: 12,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                  letterSpacing: 0.2,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

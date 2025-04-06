@@ -24,20 +24,25 @@ class HomePage extends StatelessWidget {
         child: Obx(() {
           final events = controller.events;
 
-          return SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildHeader(),
-                const SizedBox(height: 16),
-                _buildEventTarget(context, events),
-                const SizedBox(height: 16),
-
-                // 👇 Cronograma del evento visible
-                if (events.isNotEmpty)
-                  EventScheduleWidget(event: events[currentPage.value]),
-              ],
-            ),
+          return Column(
+            children: [
+              _buildHeader(),
+              const SizedBox(height: 16),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildEventTarget(context, events),
+                      const SizedBox(height: 16),
+                      // Cronograma del evento visible
+                      if (events.isNotEmpty)
+                        EventScheduleWidget(event: events[currentPage.value]),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           );
         }),
       ),

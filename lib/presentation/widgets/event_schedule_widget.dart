@@ -127,43 +127,46 @@ class EventScheduleWidget extends StatelessWidget {
       );
     }
 
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            width: 200,
-            alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-            decoration: BoxDecoration(
-              color: Color(0xFF6A1B9A),
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: const Text(
-              "Schedule",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Colors.white,
+    return SingleChildScrollView(
+      // <- Envolvemos con scroll
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 200,
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+              decoration: BoxDecoration(
+                color: Color(0xFF6A1B9A),
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: const Text(
+                "Schedule",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              children: List.generate(event.schedule.length, (index) {
-                final item = event.schedule[index];
-                return _TimelineTile(
-                  item: item,
-                  isFirst: index == 0,
-                  isLast: index == event.schedule.length - 1,
-                );
-              }),
+            const SizedBox(height: 20),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                children: List.generate(event.schedule.length, (index) {
+                  final item = event.schedule[index];
+                  return _TimelineTile(
+                    item: item,
+                    isFirst: index == 0,
+                    isLast: index == event.schedule.length - 1,
+                  );
+                }),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
