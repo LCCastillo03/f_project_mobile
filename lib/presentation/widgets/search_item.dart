@@ -25,7 +25,7 @@ class SearchItem extends StatelessWidget {
           const Icon(Icons.search, color: AppColors.dimOrange),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 11),
+              padding: const EdgeInsets.only(bottom: 4),
               child: TextField(
                 onChanged: onChanged,
                 decoration: const InputDecoration(
