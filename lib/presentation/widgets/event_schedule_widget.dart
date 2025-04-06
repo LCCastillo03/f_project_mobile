@@ -51,7 +51,7 @@ class _TimelineTile extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: Colors.purple[50]!,
+                  color: Colors.grey[300]!,
                   width: 1,
                 ),
               ),
@@ -115,10 +115,11 @@ class EventScheduleWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Text(
-            "Este evento aún no tiene cronograma.",
+            "Nothing scheduled yet",
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontStyle: FontStyle.italic,
-              color: Colors.purple[300],
+              color: Color(0xFF6A1B9A),
               fontSize: 16,
             ),
           ),
@@ -129,18 +130,18 @@ class EventScheduleWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center, // Center the children
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: 200, // Fixed width instead of double.infinity
+            width: 200,
             alignment: Alignment.center,
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
             decoration: BoxDecoration(
-              color: Color(0xFF9C27B0), // Solid purple color
+              color: Color(0xFF6A1B9A),
               borderRadius: BorderRadius.circular(24),
             ),
             child: const Text(
-              "Cronograma",
+              "Schedule",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,

@@ -69,7 +69,13 @@ Widget _buildButton(String category) {
   final EventsController controller = Get.find();
   return Obx(() {
     final isSelected = controller.selectedCategory.value == category;
-
+    final Color categoryColor;
+    if (category != "All" && AppCategories.categories[category] != null) {
+      categoryColor =
+          AppCategories.categories[category]["color"] ?? Colors.grey;
+    } else {
+      categoryColor = Color(0xFF6A1B9A);
+    }
     return GestureDetector(
       onTap: () {
         controller.updateCategory(
@@ -85,9 +91,12 @@ Widget _buildButton(String category) {
           spacing: 5,
           children: [
             category != "All"
-                ? Image.asset(AppCategories.categories[category]?["image"],
-                    width: 25, height: 25)
-                : Icon(Icons.category, size: 25),
+                ? Icon(
+                    AppCategories.categories[category]?["icon"] ?? Icons.error,
+                    size: 25,
+                    color: categoryColor,
+                  )
+                : Icon(Icons.category, size: 25, color: categoryColor),
             Text(
               category,
               style:
