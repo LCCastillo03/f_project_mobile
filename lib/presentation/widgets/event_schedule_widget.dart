@@ -25,33 +25,33 @@ class _TimelineTile extends StatelessWidget {
             child: Column(
               children: [
                 if (!isFirst)
-                  Container(width: 2, height: 12, color: Colors.purple[200]),
+                  Container(width: 1.5, height: 12, color: Colors.purple[200]),
                 Container(
-                  padding: const EdgeInsets.all(4),
+                  padding: const EdgeInsets.all(3),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white,
-                    border: Border.all(color: Colors.purple[600]!, width: 3),
+                    border: Border.all(color: Colors.purple[400]!, width: 2),
                   ),
                 ),
                 if (!isLast)
                   Expanded(
-                    child: Container(width: 2, color: Colors.purple[200]),
+                    child: Container(width: 1.5, color: Colors.purple[200]),
                   ),
               ],
             ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 14),
           // Content
           Expanded(
             child: Container(
-              margin: const EdgeInsets.only(bottom: 20),
-              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.only(bottom: 16),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: Colors.purple[100]!,
+                  color: Colors.purple[50]!,
                   width: 1,
                 ),
               ),
@@ -61,35 +61,35 @@ class _TimelineTile extends StatelessWidget {
                   Text(
                     item.topic,
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: FontWeight.w600,
-                      color: Colors.purple[800],
+                      color: Colors.purple[700],
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 4),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
+                      horizontal: 6,
+                      vertical: 2,
                     ),
                     decoration: BoxDecoration(
                       color: Colors.purple[50],
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
                       item.time,
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 12,
                         fontWeight: FontWeight.w500,
-                        color: Colors.purple[600],
+                        color: Colors.purple[500],
                       ),
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 6),
                   Text(
                     item.description,
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 13,
                       color: Colors.grey[700],
                     ),
                   ),
@@ -129,29 +129,26 @@ class EventScheduleWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center, // Center the children
         children: [
           Container(
-            width: double.infinity,
+            width: 200, // Fixed width instead of double.infinity
             alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(vertical: 12),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.purple[700]!, Colors.purple[500]!],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(12),
+              color: Color(0xFF9C27B0), // Solid purple color
+              borderRadius: BorderRadius.circular(24),
             ),
-            child: Text(
-              "Cronograma de ${event.name}",
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+            child: const Text(
+              "Cronograma",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
                 color: Colors.white,
               ),
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 20),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(

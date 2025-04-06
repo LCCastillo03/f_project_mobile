@@ -46,27 +46,27 @@ class EventDetailsH extends StatelessWidget {
                       width: 75,
                       height: 75,
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                        Text(
-                          DateFormat('MMMM').format(event.date),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 13,
-                            height: 1.1,
-                          ),
-                        ),
-                        Text(
-                          event.date.day.toString(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            height: 1.1,
-                          ),
-                        ),
-                      ]),
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              DateFormat('MMMM').format(event.date),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                height: 1.1,
+                              ),
+                            ),
+                            Text(
+                              event.date.day.toString(),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                height: 1.1,
+                              ),
+                            ),
+                          ]),
                     ),
                     // Title and organizer
                     Column(
@@ -112,23 +112,23 @@ class EventDetailsH extends StatelessWidget {
                       ],
                     ),
                   ]),
-                  // Icon at the end
-                    IconButton(
-                      icon: Icon(
-                        event.isPast()
-                            ? Icons.comment
-                            : (eventController.events[index].subscribed
-                                ? Icons.favorite
-                                : Icons.favorite_border_rounded),
-                        color: Color.fromARGB(255, 78, 22, 122),
-                        size: 28,
-                      ),
-                      onPressed: () {
-                        event.isPast()
-                            ? fbController.navigateTo(context, event)
-                            : eventController.toggleSubscription(index);
-                      },
-                    ),
+              // Icon at the end
+              IconButton(
+                icon: Icon(
+                  event.isPast()
+                      ? Icons.comment
+                      : (eventController.events[index].subscribed
+                          ? Icons.favorite
+                          : Icons.favorite_border_rounded),
+                  color: Color.fromARGB(255, 78, 22, 122),
+                  size: 28,
+                ),
+                onPressed: () {
+                  event.isPast()
+                      ? fbController.navigateTo(context, event)
+                      : eventController.toggleSubscription(index);
+                },
+              ),
             ],
           ),
         ),
