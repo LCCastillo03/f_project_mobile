@@ -6,18 +6,13 @@ import 'package:project/presentation/widgets/event_details_h.dart';
 import '../widgets/search_item.dart';
 
 class EventListPage extends StatelessWidget {
-  final String backgroundImage;
-  EventListPage({super.key, required this.backgroundImage});
+  final Color backgroundColor; // Cambiado de backgroundImage a backgroundColor
+  EventListPage({super.key, required this.backgroundColor}); //
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(backgroundImage),
-          fit: BoxFit.cover,
-        ),
-      ),
+      color: backgroundColor,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SafeArea(
@@ -74,7 +69,7 @@ Widget _buildButton(String category) {
       categoryColor =
           AppCategories.categories[category]["color"] ?? Colors.grey;
     } else {
-      categoryColor = Color(0xFF6A1B9A);
+      categoryColor = Color(0xFF443072);
     }
     return GestureDetector(
       onTap: () {

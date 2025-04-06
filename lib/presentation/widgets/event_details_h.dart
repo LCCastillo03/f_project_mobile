@@ -34,7 +34,8 @@ class EventDetailsH extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: const Color.fromRGBO(
+                    94, 37, 154, 0.05), // Using RGBA instead of withOpacity
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
@@ -69,8 +70,9 @@ class EventDetailsH extends StatelessWidget {
                       // Organizer
                       Text(
                         clipText('By ${event.author}', 26),
-                        style: TextStyle(
-                          color: AppColors.darkPurple.withOpacity(0.8),
+                        style: const TextStyle(
+                          color: Color.fromRGBO(94, 37, 154,
+                              0.8), // Using RGBA instead of withOpacity
                           fontSize: 14,
                         ),
                       ),
@@ -79,16 +81,18 @@ class EventDetailsH extends StatelessWidget {
                       // Date and time
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.calendar_today_rounded,
-                            color: AppColors.darkPurple.withOpacity(0.7),
+                            color: Color.fromRGBO(94, 37, 154,
+                                0.7), // Using RGBA instead of withOpacity
                             size: 14,
                           ),
                           const SizedBox(width: 4),
                           Text(
                             '$formattedDayOfWeek - $formattedTime',
-                            style: TextStyle(
-                              color: AppColors.darkPurple.withOpacity(0.7),
+                            style: const TextStyle(
+                              color: Color.fromRGBO(94, 37, 154,
+                                  0.7), // Using RGBA instead of withOpacity
                               fontSize: 14,
                             ),
                           ),
@@ -122,11 +126,12 @@ class EventDetailsH extends StatelessWidget {
           ],
         ),
         borderRadius: BorderRadius.circular(14),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
-            color: const Color(0xFF4E167A).withOpacity(0.3),
+            color: Color.fromRGBO(
+                78, 22, 122, 0.3), // Using RGBA instead of withOpacity
             blurRadius: 8,
-            offset: const Offset(0, 3),
+            offset: Offset(0, 3),
           ),
         ],
       ),
