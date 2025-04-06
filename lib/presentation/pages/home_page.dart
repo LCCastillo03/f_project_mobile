@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
   HomePage({super.key});
 
   final PageController _pageController = PageController(viewportFraction: 0.75);
-  final RxInt currentPage = 0.obs; // 👈 Control del evento activo
+  final RxInt currentPage = 0.obs;
 
   @override
   Widget build(BuildContext context) {
