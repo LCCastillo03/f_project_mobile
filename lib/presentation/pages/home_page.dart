@@ -5,25 +5,41 @@ import 'package:project/utils.dart';
 import '../widgets/search_item.dart';
 import '../widgets/event_card.dart';
 import 'package:project/controllers/events_controller.dart';
+import '../widgets/event_schedule_widget.dart';
+import 'package:project/domain/models/event_model.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
+  final PageController _pageController = PageController(viewportFraction: 0.75);
+  final RxInt currentPage = 0.obs; // 👈 Control del evento activo
+
   @override
   Widget build(BuildContext context) {
+    final EventsController controller = Get.find();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildHeader(),
-              const SizedBox(height: 16),
-              _buildEventTarget(context),
-            ],
-          ),
-        ),
+        child: Obx(() {
+          final events = controller.events;
+
+          return SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(),
+                const SizedBox(height: 16),
+                _buildEventTarget(context, events),
+                const SizedBox(height: 16),
+
+                // 👇 Cronograma del evento visible
+                if (events.isNotEmpty)
+                  EventScheduleWidget(event: events[currentPage.value]),
+              ],
+            ),
+          );
+        }),
       ),
     );
   }
@@ -39,10 +55,8 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 5,
             children: [
               const SizedBox(height: 40),
-              // Greeting
               Text(
                 greeting,
                 style: TextStyle(
@@ -51,7 +65,6 @@ class HomePage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              // Search bar
               SearchItem(
                 onChanged: (value) {}, // TODO: implement search
                 backgroundColor: Colors.transparent,
@@ -59,7 +72,6 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-        // Home decoration
         Positioned(
           top: 0,
           right: 0,
@@ -75,28 +87,25 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildEventTarget(BuildContext context) {
-    // TODO: HOME SHOULD STORE SUBSCRIBED EVENTS
-    final EventsController controller = Get.find();
-
+  Widget _buildEventTarget(BuildContext context, List<EventModel> events) {
     return LayoutBuilder(
       builder: (context, constraints) {
         return SizedBox(
           height: 380,
-          child: Obx(() {
-            return PageView.builder(
-              controller: PageController(viewportFraction: 0.75),
-              itemCount: controller.events.length,
-              itemBuilder: (context, index) {
-                return Center(
-                  child: SizedBox(
-                    width: constraints.maxWidth * 0.7,
-                    child: EventCard(index: index),
-                  ),
-                );
-              },
-            );
-          }),
+          child: PageView.builder(
+            controller: _pageController,
+            itemCount: events.length,
+            onPageChanged: (index) =>
+                currentPage.value = index, // 👈 Actualiza página
+            itemBuilder: (context, index) {
+              return Center(
+                child: SizedBox(
+                  width: constraints.maxWidth * 0.7,
+                  child: EventCard(index: index),
+                ),
+              );
+            },
+          ),
         );
       },
     );
