@@ -120,6 +120,14 @@ Widget _buildEventView() {
       if (pastEvents.isNotEmpty) ...[
         _buildEventSublist("Past Events", pastEvents)
       ],
+      if (futureEvents.isEmpty && pastEvents.isEmpty) ...[
+        SizedBox(height: 30),
+        Text(
+          'No events found for this category.',
+          style: TextStyle(color: Colors.white54),
+        ),
+      ],
+      SizedBox(height: 30),
     ],
   );
 }

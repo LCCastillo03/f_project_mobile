@@ -17,13 +17,13 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final EventsController controller = Get.find();
-
+    
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Obx(() {
-          final events = controller.events;
-
+          final events = controller.getSubscribedEvents();
+          
           return Column(
             children: [
               _buildHeader(),
@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
                       const SizedBox(height: 16),
                       // Cronograma del evento visible
                       if (events.isNotEmpty)
-                        EventScheduleWidget(event: events[currentPage.value]),
+                        EventScheduleWidget(event: events[currentPage.value]["event"]),
                     ],
                   ),
                 ),
@@ -92,7 +92,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildEventTarget(BuildContext context, List<EventModel> events) {
+  Widget _buildEventTarget(BuildContext context, List<dynamic> events) {
     return LayoutBuilder(
       builder: (context, constraints) {
         return SizedBox(
@@ -106,7 +106,7 @@ class HomePage extends StatelessWidget {
               return Center(
                 child: SizedBox(
                   width: constraints.maxWidth * 0.7,
-                  child: EventCard(index: index),
+                  child: EventCard(index: events[index]["index"]),
                 ),
               );
             },

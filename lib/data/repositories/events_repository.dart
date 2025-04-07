@@ -23,6 +23,7 @@ List<EventModel> eventsRepo = [
     'category': 'Business',
     'maxParticipants': 20,
     'subscribedParticipants': 2,
+    'subscribed': true,
     'location': 'Universidad del Norte',
     'avgRating': 4.3,
     'schedule': [
@@ -55,6 +56,7 @@ List<EventModel> eventsRepo = [
     'maxParticipants': 100,
     'subscribedParticipants': 50,
     'location': 'Centro Médico Internacional, Barranquilla',
+    'subscribed': true,
     'avgRating': 3.9,
     'schedule': [
       {
@@ -122,7 +124,7 @@ List<EventModel> eventsRepo = [
         'This transformative workshop will introduce attendees to the art of mindfulness, providing practical techniques for stress reduction, emotional balance, and personal growth.',
     'category': 'Personal Growth',
     'maxParticipants': 50,
-    'subscribedParticipants': 35,
+    'subscribedParticipants': 50,
     'location': 'Yoga Studio Barranquilla',
     'avgRating': 0,
     'schedule': [
@@ -155,6 +157,7 @@ List<EventModel> eventsRepo = [
     'name': 'Innovative Education Summit',
     'author': 'Laura Rodríguez',
     'date': '2025-08-05T14:00:00.000Z',
+    'subscribed': true,
     'description':
         'This summit brings together educators, technologists, and policy experts to reimagine the future of learning. Discuss innovative teaching methods, the integration of technology in education, and strategies to foster creativity and critical thinking in students. Participants will explore how to bridge gaps in education accessibility and create systems that empower learners of all ages.',
     'category': 'Education',

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     Get.put(FeedbackController());
     Get.put(EventsController());
   
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: NavigationController(),
     );

@@ -46,6 +46,7 @@ class EventModel {
       category: json['category'],
       maxParticipants: json['maxParticipants'],
       subscribedParticipants: json['subscribedParticipants'],
+      subscribed: json['subscribed'] ?? false,
       location: json['location'],
       avgRating: (json['avgRating'] as num?)?.toDouble(),
       schedule: (json['schedule'] ?? [])

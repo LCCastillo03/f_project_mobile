@@ -35,7 +35,7 @@ class EventDetailsH extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: const Color.fromRGBO(
-                    94, 37, 154, 0.05), // Using RGBA instead of withOpacity
+                    94, 37, 154, 0.05),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
@@ -72,8 +72,9 @@ class EventDetailsH extends StatelessWidget {
                         clipText('By ${event.author}', 26),
                         style: const TextStyle(
                           color: Color.fromRGBO(94, 37, 154,
-                              0.8), // Using RGBA instead of withOpacity
+                              0.8),
                           fontSize: 14,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       const SizedBox(height: 6),
@@ -94,6 +95,7 @@ class EventDetailsH extends StatelessWidget {
                               color: Color.fromRGBO(94, 37, 154,
                                   0.7), // Using RGBA instead of withOpacity
                               fontSize: 14,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ],
@@ -179,7 +181,7 @@ class EventDetailsH extends StatelessWidget {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             child: Icon(
-              isPast
+              isPast 
                   ? Icons.comment
                   : (isSubscribed
                       ? Icons.favorite

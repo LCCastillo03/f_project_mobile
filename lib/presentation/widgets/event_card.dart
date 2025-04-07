@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:project/controllers/events_controller.dart';
+import 'package:project/controllers/feedback_controllers.dart';
 import 'package:project/utils.dart';
 
 class EventCard extends StatelessWidget {
   final int index;
-  final EventsController controller = Get.find();
+  final EventsController evController = Get.find();
+  final FeedbackController fbController = Get.find();
 
   EventCard({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      final event = controller.events[index];
+      final event = evController.events[index];
       return GestureDetector(
-        onTap: () => controller.navigateTo(context, index),
+        onTap: () => evController.navigateTo(context, index),
         child: Container(
           width: 300,
           height: 360,
@@ -93,15 +95,17 @@ class EventCard extends StatelessWidget {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () => controller.toggleSubscription(index),
+                            onTap: () {
+                              event.isPast()
+                                  ? fbController.navigateTo(context, event)
+                                  : evController.toggleSubscription(index);
+                            },
                             child: Icon(
-                              controller.events[index].subscribed
-                                  ? Icons.favorite
-                                  : Icons.favorite_border,
+                              event.isPast() ? Icons.comment : Icons.favorite,
                               color: Colors.purple,
                               size: 24,
                             ),
-                          ),
+                          )
                         ],
                       ),
                       Text(

@@ -31,6 +31,7 @@ class EventsController extends GetxController {
               'This event has reached its maximum capacity',
               backgroundColor: Colors.red,
               colorText: Colors.white,
+              margin: EdgeInsets.all(10),
               snackPosition: SnackPosition.BOTTOM);
           return false;
         }
@@ -82,10 +83,16 @@ class EventsController extends GetxController {
     return false;
   }
 
-  List getTimeEvents(bool isPast) {
+  List getSubscribedEvents() {
     return events
-        .where((event) => (isPast ? event.isPast() : !event.isPast()))
-        .toList();
+        .asMap()
+        .entries
+        .where((entry) => entry.value.subscribed == true)
+        .map((entry) => {
+              "index": entry.key, // Original index before filtering
+              "event": entry.value // Event object
+            })
+        .toList(); 
   }
 
   List getFilteredEvents() {
