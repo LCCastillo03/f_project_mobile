@@ -36,5 +36,5 @@ String getGreeting() {
 }
 
 List<String> getAvatarPaths() {
-  return List.generate(5, (index) => 'assets/images/avatars/avatar-$index.jpg');
+  return List.generate(7, (index) => 'assets/images/avatars/avatar-$index.jpg');
 }
