@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -95,126 +97,154 @@ class _CalendarPageState extends State<CalendarPage> {
         ? 'Events on ${DateFormat.yMMMd().format(_selectedDay)}'
         : 'Upcoming Events';
 
-    return Scaffold(
-      backgroundColor: AppColors.darkPurple,
-      appBar: AppBar(
-        title: const Text(
-          'Calendar',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          _buildTableCalendar(),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            child: Row(
+    return Container(
+      decoration: BoxDecoration(
+          gradient: RadialGradient(colors: [
+        Color(0xff2b2771),
+        Color(0xff372173),
+        Color.fromARGB(255, 57, 29, 97),
+      ])),
+      child: Scaffold(
+        backgroundColor: AppColors.darkPurple,
+        body: Stack(
+          children: [
+            // random stars
+            ...List.generate(100, (index) {
+              final random = Random();
+              return Positioned(
+                left: random.nextDouble() * MediaQuery.of(context).size.width,
+                top: random.nextDouble() * MediaQuery.of(context).size.height,
+                child: Container(
+                  width:
+                      random.nextDouble() * 3 + 1, // Random size for variation
+                  height: random.nextDouble() * 3 + 1,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              );
+            }),
+            Column(
               children: [
-                GestureDetector(
-                  onTap: _showFilterDialog,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      border: Border.all(color: Colors.white30),
-                      borderRadius: BorderRadius.circular(15),
+                Padding(
+                  padding: const EdgeInsets.only(top: 35, bottom: 10),
+                  child: Text(
+                    "Calendar",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12.0, vertical: 8.0),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.filter_list,
-                              color: Colors.white, size: 16),
-                          const SizedBox(width: 5),
-                          Text(
-                            'Filter: $_selectedCategory',
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
+                  ),
+                ),
+                _buildTableCalendar(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 10.0),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: _showFilterDialog,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            border: Border.all(color: Colors.white30),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12.0, vertical: 8.0),
+                            child: Row(
+                              children: [
+                                const Icon(Icons.filter_list,
+                                    color: Colors.white, size: 16),
+                                const SizedBox(width: 5),
+                                Text(
+                                  'Filter: $_selectedCategory',
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const Icon(Icons.keyboard_arrow_down,
+                                    color: Colors.white, size: 18),
+                              ],
                             ),
                           ),
-                          const Icon(Icons.keyboard_arrow_down,
-                              color: Colors.white, size: 18),
-                        ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 20.0, right: 20.0, bottom: 10.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      sectionTitle,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
                   ),
                 ),
+                Expanded(
+                  child: eventsForSelectedDay.isEmpty
+                      ? const Center(
+                          child: Text(
+                            'No events found for this day and filter.',
+                            style: TextStyle(color: Colors.white54),
+                          ),
+                        )
+                      : ListView.builder(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          itemCount: eventsForSelectedDay.length,
+                          itemBuilder: (context, index) {
+                            final event = eventsForSelectedDay[index];
+                            final originalIndex = eventsController.events
+                                .indexWhere((e) => e.id == event.id);
+
+                            if (originalIndex == -1) {
+                              return const SizedBox.shrink();
+                            }
+
+                            return Container(
+                              margin: const EdgeInsets.only(bottom: 16.0),
+                              decoration: BoxDecoration(
+                                //color: AppColors.mediumPurple,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.to(() =>
+                                      EventDetailPage(index: originalIndex));
+                                },
+                                child: EventDetailsH(index: originalIndex),
+                              ),
+                            );
+                          },
+                        ),
+                ),
               ],
             ),
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 10.0),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                sectionTitle,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: eventsForSelectedDay.isEmpty
-                ? const Center(
-                    child: Text(
-                      'No events found for this day and filter.',
-                      style: TextStyle(color: Colors.white54),
-                    ),
-                  )
-                : ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    itemCount: eventsForSelectedDay.length,
-                    itemBuilder: (context, index) {
-                      final event = eventsForSelectedDay[index];
-                      final originalIndex = eventsController.events
-                          .indexWhere((e) => e.id == event.id);
-
-                      if (originalIndex == -1) {
-                        return const SizedBox.shrink();
-                      }
-
-                      return Container(
-                        margin: const EdgeInsets.only(bottom: 16.0),
-                        decoration: BoxDecoration(
-                          color: AppColors.mediumPurple,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: GestureDetector(
-                          onTap: () {
-                            Get.to(() => EventDetailPage(index: originalIndex));
-                          },
-                          child: EventDetailsH(index: originalIndex),
-                        ),
-                      );
-                    },
-                  ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildTableCalendar() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
       decoration: BoxDecoration(
         color: AppColors.mediumPurple,
         borderRadius: BorderRadius.circular(20),
       ),
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.only(left: 6, right: 6, bottom: 16, top: 0),
       child: TableCalendar<EventModel>(
         firstDay: DateTime.utc(2020, 1, 1),
         lastDay: DateTime.utc(2030, 12, 31),
@@ -226,23 +256,23 @@ class _CalendarPageState extends State<CalendarPage> {
         calendarStyle: CalendarStyle(
           // Match the design in the image
           todayDecoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.2),
+            color: Colors.white.withAlpha(40),
             shape: BoxShape.circle,
           ),
           selectedDecoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.3),
-            border: Border.all(color: Colors.white, width: 1),
+            color: Colors.white.withAlpha(76),
+            //border: Border.all(color: Colors.white, width: 1),
             shape: BoxShape.circle,
           ),
           markerDecoration: const BoxDecoration(
-            color: Colors.pink,
+            color: AppColors.brightOrange,
             shape: BoxShape.circle,
           ),
           markersMaxCount: 1,
           markerSize: 4,
           markerMargin: const EdgeInsets.only(top: 1),
           outsideDaysVisible: true,
-          outsideTextStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
+          outsideTextStyle: TextStyle(color: Colors.white.withAlpha(76)),
           defaultTextStyle: const TextStyle(color: Colors.white),
           weekendTextStyle: const TextStyle(color: Colors.white),
           selectedTextStyle: const TextStyle(
@@ -265,7 +295,7 @@ class _CalendarPageState extends State<CalendarPage> {
           ),
           leftChevronIcon: Container(
             decoration: BoxDecoration(
-              color: AppColors.darkPurple.withOpacity(0.5),
+              color: AppColors.darkPurple.withAlpha(127),
               shape: BoxShape.circle,
             ),
             padding: const EdgeInsets.all(8.0),
@@ -274,7 +304,7 @@ class _CalendarPageState extends State<CalendarPage> {
           ),
           rightChevronIcon: Container(
             decoration: BoxDecoration(
-              color: AppColors.darkPurple.withOpacity(0.5),
+              color: AppColors.darkPurple.withAlpha(127),
               shape: BoxShape.circle,
             ),
             padding: const EdgeInsets.all(8.0),

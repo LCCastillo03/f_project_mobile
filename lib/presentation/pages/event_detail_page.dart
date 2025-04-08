@@ -281,7 +281,7 @@ class EventDetailPage extends StatelessWidget {
                     Text(
                       '${event.subscribedParticipants}/${event.maxParticipants}',
                       style: TextStyle(
-                        color: isFull ? Colors.red : Colors.white,
+                        color: isFull ? AppColors.brightRed : Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -290,7 +290,7 @@ class EventDetailPage extends StatelessWidget {
                       Text(
                         'Event is full',
                         style: TextStyle(
-                          color: Colors.red,
+                          color: AppColors.brightRed,
                           fontSize: 12,
                         ),
                       ),

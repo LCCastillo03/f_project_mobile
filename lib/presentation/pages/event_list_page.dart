@@ -1,39 +1,65 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/controllers/events_controller.dart';
+import 'package:project/presentation/theme/app_colors.dart';
 import 'package:project/presentation/theme/categories.dart';
 import 'package:project/presentation/widgets/event_details_h.dart';
 import '../widgets/search_item.dart';
 
 class EventListPage extends StatelessWidget {
-  final Color backgroundColor; // Cambiado de backgroundImage a backgroundColor
-  EventListPage({super.key, required this.backgroundColor}); //
+  const EventListPage({super.key}); //
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: backgroundColor,
+      decoration: BoxDecoration(
+                  gradient: RadialGradient(colors: [
+                    Color(0xff2b2771),
+                    Color(0xff372173),
+                    Color.fromARGB(255, 57, 29, 97),
+                  ])
+                ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Obx(() {
-                // try deleting
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  spacing: 20,
-                  children: [
-                    SizedBox(height: 10),
-                    SearchItem(
-                        onChanged: (value) {}), // TODO: search item action?
-                    _buildCategoryList(),
-                    _buildEventView(),
-                  ],
+            child: Stack(children: [
+              // random stars
+              ...List.generate(100, (index) {
+                final random = Random();
+                return Positioned(
+                  left: random.nextDouble() * MediaQuery.of(context).size.width,
+                  top: random.nextDouble() * MediaQuery.of(context).size.height,
+                  child: Container(
+                    width: random.nextDouble() * 3 +
+                        1, // Random size for variation
+                    height: random.nextDouble() * 3 + 1,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
                 );
               }),
-            ),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Obx(() {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 20,
+                    children: [
+                      SearchItem(
+                          onChanged: (value) {}), // TODO: search item action?
+                      _buildCategoryList(),
+                      _buildEventView(),
+                      SizedBox(height: 20),
+                    ],
+                  );
+                }),
+              ),
+            ]),
           ),
         ),
       ),
@@ -127,7 +153,6 @@ Widget _buildEventView() {
           style: TextStyle(color: Colors.white54),
         ),
       ],
-      SizedBox(height: 30),
     ],
   );
 }

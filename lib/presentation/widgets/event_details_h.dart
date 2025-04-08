@@ -30,13 +30,12 @@ class EventDetailsH extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.white.withAlpha(220),
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: const Color.fromRGBO(
-                    94, 37, 154, 0.05),
-                blurRadius: 10,
+                color: Colors.white24,
+                blurRadius: 6,
                 offset: const Offset(0, 4),
               ),
             ],
@@ -59,7 +58,7 @@ class EventDetailsH extends StatelessWidget {
                       Text(
                         clipText(event.name, 23),
                         style: const TextStyle(
-                          color: AppColors.darkPurple,
+                          color: AppColors.mediumPurple,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           height: 1.2,
@@ -70,9 +69,8 @@ class EventDetailsH extends StatelessWidget {
                       // Organizer
                       Text(
                         clipText('By ${event.author}', 26),
-                        style: const TextStyle(
-                          color: Color.fromRGBO(94, 37, 154,
-                              0.8),
+                        style: TextStyle(
+                          color: Colors.purple[900], 
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -82,18 +80,16 @@ class EventDetailsH extends StatelessWidget {
                       // Date and time
                       Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.calendar_today_rounded,
-                            color: Color.fromRGBO(94, 37, 154,
-                                0.7), // Using RGBA instead of withOpacity
+                            color: Colors.purple[900], 
                             size: 14,
                           ),
                           const SizedBox(width: 4),
                           Text(
                             '$formattedDayOfWeek - $formattedTime',
-                            style: const TextStyle(
-                              color: Color.fromRGBO(94, 37, 154,
-                                  0.7), // Using RGBA instead of withOpacity
+                            style: TextStyle(
+                              color: Colors.purple[900], 
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                             ),
@@ -130,8 +126,7 @@ class EventDetailsH extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: const [
           BoxShadow(
-            color: Color.fromRGBO(
-                78, 22, 122, 0.3), // Using RGBA instead of withOpacity
+            color: Colors.transparent,// Color.fromRGBO(78, 22, 122, 0.3), // Using RGBA instead of withOpacity
             blurRadius: 8,
             offset: Offset(0, 3),
           ),
@@ -186,7 +181,7 @@ class EventDetailsH extends StatelessWidget {
                   : (isSubscribed
                       ? Icons.favorite
                       : Icons.favorite_border_rounded),
-              color: isPast ? AppColors.darkPurple : Colors.red,
+              color: isPast ? Colors.grey[700] : AppColors.brightRed,
               size: 26,
               semanticLabel: isPast
                   ? 'Leave feedback'

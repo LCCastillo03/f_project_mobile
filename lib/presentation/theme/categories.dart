@@ -25,7 +25,7 @@ class AppCategories {
     },
     "Personal Growth": {
       "icon": Icons.self_improvement,
-      "color": Colors.purple,
+      "color": Color(0xFF6A1B9A),
       "description": "Self-help, skills development, and personal enrichment."
     },
   };

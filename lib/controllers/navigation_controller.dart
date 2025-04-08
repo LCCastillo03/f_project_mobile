@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:project/presentation/pages/past_future_event_list_page.dart';
+import 'package:project/presentation/pages/event_list_page.dart';
 import 'package:project/presentation/pages/home_page.dart';
 import 'package:project/presentation/pages/calendar_page.dart';
 
@@ -18,7 +18,7 @@ class _NavigationControllerState extends State<NavigationController>
 
   final List<Widget> _pages = [
     HomePage(),
-    PastFutureEventListPage(),
+    EventListPage(),
     CalendarPage(),
   ];
 
