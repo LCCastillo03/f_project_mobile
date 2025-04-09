@@ -6,6 +6,7 @@ import 'package:project/controllers/events_controller.dart';
 import 'package:project/controllers/feedback_controllers.dart';
 import 'package:project/presentation/theme/app_colors.dart';
 import 'package:project/utils.dart';
+import 'package:project/presentation/widgets/agenda_item.dart';
 
 class EventDetailPage extends StatelessWidget {
   final int index;
@@ -58,8 +59,11 @@ class EventDetailPage extends StatelessWidget {
                         ],
                       ),
                     ),
+                    
                   ),
-                  const SizedBox(height: 95),
+                _buildAgenda(event),
+                const SizedBox(height: 140),
+
                 ],
               ),
             ),
@@ -193,47 +197,42 @@ class EventDetailPage extends StatelessWidget {
     );
   }
 
-  /*Widget _buildAgenda() { TODO: REVISE & DELETE
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
+ Widget _buildAgenda( event) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Center(
+        child: Text(
           'Agenda',
+          textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 20),
-        SizedBox(
-          height: 200,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: const [
-              AgendaItem(
-                  imagePath: "assets/images/business-icon.png",
-                  title: 'FinTech Revolution',
-                  date: 'June 12, 2025',
-                  time: '10:00 pm'),
-              SizedBox(width: 12),
-              AgendaItem(
-                  imagePath: "assets/images/science-icon.png",
-                  title: 'Engineering Future',
-                  date: 'June 16, 2025',
-                  time: '9:00 pm'),
-              SizedBox(width: 12),
-              AgendaItem(
-                  imagePath: "assets/images/education-icon.png",
-                  title: 'Future of Learning',
-                  date: 'June 16, 2025',
-                  time: '7:00 pm'),
-            ],
-          ),
+      ),
+      const SizedBox(height: 20),
+      SizedBox(
+        height: 170,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemCount: event.schedule.length,
+          separatorBuilder: (_, __) => const SizedBox(width: 10),
+          itemBuilder: (context, index) {
+            final item = event.schedule[index];
+            return AgendaItem(
+              title: item.topic,
+              description: item.description,
+              time: item.time,
+            );
+          },
         ),
-      ],
-    );
-  }*/
+      ),
+    ],
+  );
+}
+
 
   Widget _buildEventDescription(description) {
     return Padding(

@@ -4,15 +4,13 @@ import 'package:project/presentation/theme/app_colors.dart';
 class AgendaItem extends StatelessWidget {
   final String title;
   final String time;
-  final String date;
-  final String imagePath;
+  final String description;
 
   const AgendaItem({
     super.key,
     required this.title,
     required this.time,
-    required this.date,
-    required this.imagePath,
+    required this.description,
   });
 
   @override
@@ -20,51 +18,50 @@ class AgendaItem extends StatelessWidget {
     return Container(
       width: 200,
       height: 200,
-      margin: const EdgeInsets.only(right: 12),
-      padding: const EdgeInsets.all(18),
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: AppColors.mediumPurple,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.asset(
-            imagePath,
-            height: 70,
-            width: 70,
-            fit: BoxFit.cover,
-          ),
-          const SizedBox(height: 10),
-          Text(
-            title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
+      child: Center( 
+        child: Column(
+          mainAxisSize: MainAxisSize.min, 
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            date,
-            style: const TextStyle(
-              color: Colors.white54,
-//>>>>>>> main
-              fontSize: 14,
+            const SizedBox(height: 8),
+            Text(
+              description,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.white54,
+                fontSize: 14,
+              ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            time,
-            style: const TextStyle(
-              color: Colors.white54,
-              fontSize: 14,
+            const SizedBox(height: 8),
+            Text(
+              time,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.white54,
+                fontSize: 14,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
+
 }
 
 class AgendaList extends StatelessWidget {
