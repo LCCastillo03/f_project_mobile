@@ -56,12 +56,13 @@ class EventDetailPage extends StatelessWidget {
                               date: event.date, isSubscribed: event.subscribed),
                           const SizedBox(height: 30),
                           _buildEventDescription(event.description),
+                            _buildAgenda(event)
                         ],
                       ),
                     ),
                     
                   ),
-                _buildAgenda(event),
+                
                 const SizedBox(height: 140),
 
                 ],
@@ -203,7 +204,7 @@ class EventDetailPage extends StatelessWidget {
     children: [
       const Center(
         child: Text(
-          'Agenda',
+          'Schedule',
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.white,

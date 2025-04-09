@@ -24,9 +24,9 @@ class AgendaItem extends StatelessWidget {
         color: AppColors.mediumPurple,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Center( 
+      child: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min, 
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
@@ -48,19 +48,26 @@ class AgendaItem extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            Text(
-              time,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.white54,
-                fontSize: 14,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.access_time, size: 16, color: Colors.white),
+                const SizedBox(width: 4),
+                Text(
+                  time,
+                  style: const TextStyle(
+                    color: Colors.white54,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
       ),
     );
   }
+
 
 }
 
