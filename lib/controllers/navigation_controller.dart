@@ -72,7 +72,7 @@ class _NavigationControllerState extends State<NavigationController>
             color: backgroundColor,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.06),
+                color: Colors.black.withAlpha(15),
                 blurRadius: 8,
                 offset: const Offset(0, -1),
               ),
@@ -115,9 +115,10 @@ class _NavigationControllerState extends State<NavigationController>
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           decoration: BoxDecoration(
             color: isSelected
-                ? secondaryColor.withOpacity(0.2)
+                ? secondaryColor.withAlpha(51)
                 : Colors.transparent,
-            borderRadius: BorderRadius.circular(16),
+                shape: BoxShape.circle,
+            //borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
             mainAxisSize: MainAxisSize
@@ -127,9 +128,9 @@ class _NavigationControllerState extends State<NavigationController>
               Icon(
                 icon,
                 color: isSelected ? primaryColor : inactiveColor,
-                size: 24,
+                size: 30,
               ),
-              const SizedBox(height: 4),
+              /*const SizedBox(height: 4),
               Text(
                 label,
                 style: TextStyle(
@@ -138,7 +139,7 @@ class _NavigationControllerState extends State<NavigationController>
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                   letterSpacing: 0.2,
                 ),
-              ),
+              ),*/
             ],
           ),
         ),
