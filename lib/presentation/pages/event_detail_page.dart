@@ -56,15 +56,13 @@ class EventDetailPage extends StatelessWidget {
                               date: event.date, isSubscribed: event.subscribed),
                           const SizedBox(height: 30),
                           _buildEventDescription(event.description),
-                            _buildAgenda(event)
+                          const SizedBox(height: 20),
+                          _buildAgenda(event),
                         ],
                       ),
                     ),
-                    
                   ),
-                
-                const SizedBox(height: 140),
-
+                  const SizedBox(height: 100),
                 ],
               ),
             ),
@@ -198,42 +196,41 @@ class EventDetailPage extends StatelessWidget {
     );
   }
 
- Widget _buildAgenda( event) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      const Center(
-        child: Text(
-          'Schedule',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+  Widget _buildAgenda(event) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Center(
+          child: Text(
+            'Schedule',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-      ),
-      const SizedBox(height: 20),
-      SizedBox(
-        height: 170,
-        child: ListView.separated(
-          scrollDirection: Axis.horizontal,
-          itemCount: event.schedule.length,
-          separatorBuilder: (_, __) => const SizedBox(width: 10),
-          itemBuilder: (context, index) {
-            final item = event.schedule[index];
-            return AgendaItem(
-              title: item.topic,
-              description: item.description,
-              time: item.time,
-            );
-          },
+        const SizedBox(height: 20),
+        SizedBox(
+          height: 170,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: event.schedule.length,
+            separatorBuilder: (_, __) => const SizedBox(width: 10),
+            itemBuilder: (context, index) {
+              final item = event.schedule[index];
+              return AgendaItem(
+                title: item.topic,
+                description: item.description,
+                time: item.time,
+              );
+            },
+          ),
         ),
-      ),
-    ],
-  );
-}
-
+      ],
+    );
+  }
 
   Widget _buildEventDescription(description) {
     return Padding(
